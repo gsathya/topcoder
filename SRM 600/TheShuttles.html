@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+
+	<style type="text/css">
+		body { font-family: Helvetica, Arial, Verdana, sans-serif; }
+		.heading { font-weight: bold; font-size: 28px; text-align: center; }
+		.section { padding-top: 10px; }
+		.section .section-title { font-weight: bold; font-size: 20px; color: grey; }
+        .problem-intro { padding-left: 20px; }
+        note, user-constraint { padding-left: 20px; }
+		type {
+			font-weight: bold;
+			font-family: monospace;
+		}
+		img {
+			float: none;
+			display: block;
+			width: 200px;
+			height: auto;
+			margin: 10px;
+			border: 0px solid #ccc;
+		}
+		ul {
+			list-style-type: none;
+			padding: 0px;
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		ul.constraints li:before {
+			content: "-";
+			font-size: 16px;
+			font-family: monospace;
+			position:relative;
+			margin-left: 0px; /* optional, for multiline li element */
+			left: 10px;
+		}
+		ul.notes li:before {
+			content: "~";
+			font-size: 16px;
+			font-family: monospace;
+			font-weight: normal;
+			position:relative;
+			margin-left: 0px; /* optional, for multiline li element */
+			left: 10px;
+		}
+
+		li.testcase {
+			display: flex;
+			line-height: 16px;
+			padding-top: 10px;
+			padding-bottom: 10px;
+		}
+		li.testcase div.testcase-no {
+            min-width: 16px;
+			width: 16px;
+			height: 16px;
+			font-size: 16px;
+			line-height: 16px;
+			padding: 8px;
+			margin-right: 10px;
+			border-radius: 100%;
+			font-weight: bold;
+			text-align: center;
+			vertical-align: top;
+			border: 2px solid #ddd;
+			color: grey;
+		}
+		li.testcase span {
+			vertical-align: middle; 
+			text-align: center;
+			height: 15px;
+			line-height: 16px;
+			min-width: 45px;
+			border-radius: 5px;
+			padding: 0px;
+			padding-left: 5px;
+			padding-right: 5px;
+			margin-right: 10px;
+			display: inline-block;
+		}
+		li.testcase > .testcase-content > div { padding-bottom: 8px; }
+		li.testcase .tag {
+			background: #545454;
+			color: white;
+			font-family: Georgia;
+			font-size: 10px;
+			text-align: center;
+		}
+		li.testcase .testcase-input .tag { visibility: hidden; }
+		li.testcase .testcase-input .tag:first-child { visibility: visible; }
+		li.testcase .data {
+			background: #eee;
+			font-family: monospace;
+		}
+        li.testcase .testcase-comment {
+            margin: 0;
+            padding-left: 5px;
+        }
+        .testcase-comment p:first-child { margin-top: 0; }
+        .testcase-comment p:last-child { margin-bottom: 0; }
+	</style>
+
+    <title>Topcoder - SRM 600 - Problem 250</title>
+</head>
+
+<body>
+	<div class="heading">
+        SRM 600 Div 2 - Problem 250 <br/>
+        TheShuttles
+    </div>
+
+	<hr/>
+
+    <!-- Problem Statemnt -->
+    <div class="section">
+        <div class="section-title">Problem Statement</div>
+        <div class="problem-intro">
+            <intro escaped="1"><p><i>Note that the memory limit for all tasks in this SRM is 256 MB.</i></p>
+<br></br>
+The company Manao Inc. cares for its employees and tries to provide them with as much comfort as possible. One of the services Manao Inc. provides is transportation of employees from N distant locations to the office. The locations are numbered from 0 to N-1. You are given a <type>int[]</type> <b>cnt</b> containing N elements. The i-th (0-based index) element of <b>cnt</b> is the number of employees who live near location i.
+<br></br><br></br>
+The company wants to purchase several shuttles <i>of the same size</i>. These shuttles will then be used for employee transportation. Each of the shuttles will only serve one particular location. Each location will be assigned the smallest number of shuttles sufficient to transport all of the employees living close to it.
+<br></br><br></br>
+The cost of a shuttle consists of the cost <b>baseCost</b> of its frame and some additional cost <b>seatCost</b> per each seat. That is, a shuttle with X seats will cost <b>baseCost</b> + X * <b>seatCost</b>. For its shuttles, Manao Inc. can choose X to be any positive integer. (But remember that all the shuttles must have the same X.) Compute and return the least amount of money the company needs to spend on the shuttles in order to provide transportation for all employees.</intro>
+        </div>
+    </div>
+
+    <!-- Notes -->
+    <div class="section">
+        <div class="section-title">Notes</div>
+        <ul class="notes">
+                </ul>
+    </div>
+
+    <!-- Constraints -->
+    <div class="section">
+        <div class="section-title">Constraints</div>
+        <ul class="constraints">
+                    <li><user-constraint escaped="1"><b>cnt</b> will contain between 1 and 50 elements, inclusive.</user-constraint></li>
+                    <li><user-constraint escaped="1">Each element of <b>cnt</b> will be between 1 and 100, inclusive.</user-constraint></li>
+                    <li><user-constraint escaped="1"><b>baseCost</b> will be between 1 and 100, inclusive.</user-constraint></li>
+                    <li><user-constraint escaped="1"><b>seatCost</b> will be between 1 and 100, inclusive.</user-constraint></li>
+                </ul>
+    </div>
+
+    <!-- Test cases -->
+    <div class="section">
+        <div class="section-title">Test cases</div>
+        <ul class="testcases">
+                        <li class="testcase">
+                <div class="testcase-no">0</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>cnt</b>: { 9 }</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>baseCost</b>: 30</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>seatCost</b>: 5</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">75</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment">Manao Inc. provides transportation for its employees from a single location. There are 9 employees living near it. A shuttle with X seats will cost the company 30 + 5X. It is optimal to buy a single shuttle with 9 seats.</div>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">1</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>cnt</b>: { 9, 4 }</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>baseCost</b>: 30</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>seatCost</b>: 5</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">150</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment">Manao Inc. provides transportation from two locations. There are 9 employees living near location 0 and 4 employees living near location 1. It is optimal to buy two shuttles with 9 seats each and send a single shuttle to each location. (Note that the shuttles we buy must all be of the same size. It is not allowed to buy one shuttle with 9 and another with 4 seats.)</div>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">2</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>cnt</b>: { 9, 4 }</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>baseCost</b>: 10</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>seatCost</b>: 5</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">105</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment">This is the same test as the previous example, but <b>baseCost</b> is lower. It is optimal to buy three shuttles with 5 seats each and send two shuttles to location 0 and one shuttle to location 1.</div>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">3</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>cnt</b>: { 51, 1, 77, 14, 17, 10, 80 }</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>baseCost</b>: 32</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>seatCost</b>: 40</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">12096</span>
+                    </div>
+                                    </div>
+            </li>
+                    </ul>
+    </div>
+
+    <hr>
+
+    This problem statement is the exclusive and proprietary property of TopCoder, Inc. Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.
+</body>
+</html>
