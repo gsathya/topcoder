@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+
+	<style type="text/css">
+		body { font-family: Helvetica, Arial, Verdana, sans-serif; }
+		.heading { font-weight: bold; font-size: 28px; text-align: center; }
+		.section { padding-top: 10px; }
+		.section .section-title { font-weight: bold; font-size: 20px; color: grey; }
+        .problem-intro { padding-left: 20px; }
+        note, user-constraint { padding-left: 20px; }
+		type {
+			font-weight: bold;
+			font-family: monospace;
+		}
+		img {
+			float: none;
+			display: block;
+			width: 200px;
+			height: auto;
+			margin: 10px;
+			border: 0px solid #ccc;
+		}
+		ul {
+			list-style-type: none;
+			padding: 0px;
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		ul.constraints li:before {
+			content: "-";
+			font-size: 16px;
+			font-family: monospace;
+			position:relative;
+			margin-left: 0px; /* optional, for multiline li element */
+			left: 10px;
+		}
+		ul.notes li:before {
+			content: "~";
+			font-size: 16px;
+			font-family: monospace;
+			font-weight: normal;
+			position:relative;
+			margin-left: 0px; /* optional, for multiline li element */
+			left: 10px;
+		}
+
+		li.testcase {
+			display: flex;
+			line-height: 16px;
+			padding-top: 10px;
+			padding-bottom: 10px;
+		}
+		li.testcase div.testcase-no {
+            min-width: 16px;
+			width: 16px;
+			height: 16px;
+			font-size: 16px;
+			line-height: 16px;
+			padding: 8px;
+			margin-right: 10px;
+			border-radius: 100%;
+			font-weight: bold;
+			text-align: center;
+			vertical-align: top;
+			border: 2px solid #ddd;
+			color: grey;
+		}
+		li.testcase span {
+			vertical-align: middle; 
+			text-align: center;
+			height: 15px;
+			line-height: 16px;
+			min-width: 45px;
+			border-radius: 5px;
+			padding: 0px;
+			padding-left: 5px;
+			padding-right: 5px;
+			margin-right: 10px;
+			display: inline-block;
+		}
+		li.testcase > .testcase-content > div { padding-bottom: 8px; }
+		li.testcase .tag {
+			background: #545454;
+			color: white;
+			font-family: Georgia;
+			font-size: 10px;
+			text-align: center;
+		}
+		li.testcase .testcase-input .tag { visibility: hidden; }
+		li.testcase .testcase-input .tag:first-child { visibility: visible; }
+		li.testcase .data {
+			background: #eee;
+			font-family: monospace;
+		}
+        li.testcase .testcase-comment {
+            margin: 0;
+            padding-left: 5px;
+        }
+        .testcase-comment p:first-child { margin-top: 0; }
+        .testcase-comment p:last-child { margin-bottom: 0; }
+	</style>
+
+    <title>Topcoder - SRM 203 - Problem 250</title>
+</head>
+
+<body>
+	<div class="heading">
+        SRM 203 Div 2 - Problem 250 <br/>
+        UserName
+    </div>
+
+	<hr/>
+
+    <!-- Problem Statemnt -->
+    <div class="section">
+        <div class="section-title">Problem Statement</div>
+        <div class="problem-intro">
+            <intro><p>
+
+You are implementing the member registration system of an online dating
+site. When a new member signs up, it is possible that she initially
+chooses the same username as an existing member. The system must then
+inform the new member of the conflict and suggest a variant of the chosen
+name with a number attached to the end.
+
+</p>
+<p>
+
+If an existing member is named &quot;FunkyMonkey&quot;, for example, and
+a new member wants the same username, the simplest suggestion the system
+can make is &quot;FunkyMonkey1&quot;.  If there is already a member by
+that name, the system must suggest &quot;FunkyMonkey2&quot;, unless that 
+variant is also taken. If all names from &quot;FunkyMonkey1&quot;
+through &quot;FunkyMonkey9&quot; are taken as well as the
+original &quot;FunkyMonkey&quot;, the system moves on to consider 
+&quot;FunkyMonkey10&quot;, and so on. The goal is to use the smallest possible
+number in the variant. Note that each username consists of letters (the characters
+from 'a' to 'z' and from 'A' to 'Z') and numerals ('0' to '9').
+
+</p>
+<p>
+
+You are given a <type>String[]</type>, <b>existingNames</b>, containing
+all usernames that have already been registered in the system. You are
+also given a single <type>String</type>, <b>newName</b>, containing the
+username that a new member wants to use. In the event of a conflict, this
+member will accept the suggestion offered by your system in accordance
+with the principles above. Return a <type>String</type> containing the
+username finally assigned to the new member.
+
+</p>
+
+</intro>
+        </div>
+    </div>
+
+    <!-- Notes -->
+    <div class="section">
+        <div class="section-title">Notes</div>
+        <ul class="notes">
+                    <li><note>The constraints rule out names that end in a number with a leading zero, such as &quot;grokster006&quot; and &quot;bart0&quot;.</note></li>
+                </ul>
+    </div>
+
+    <!-- Constraints -->
+    <div class="section">
+        <div class="section-title">Constraints</div>
+        <ul class="constraints">
+                    <li><user-constraint><b>existingNames</b> contains between 1 and 50 elements, inclusive</user-constraint></li>
+                    <li><user-constraint>each element of <b>existingNames</b> is between 1 and 50 characters long, inclusive</user-constraint></li>
+                    <li><user-constraint>the only characters permitted in elements of <b>existingNames</b> are 'a' to 'z', 'A' to 'Z', and '0' to '9'</user-constraint></li>
+                    <li><user-constraint>no element of <b>existingNames</b> ends in a number that has a leading zero</user-constraint></li>
+                    <li><user-constraint><b>newName</b> is between 1 and 50 characters long, inclusive</user-constraint></li>
+                    <li><user-constraint>the only characters permitted in <b>newName</b> are 'a' to 'z' and 'A' to 'Z'</user-constraint></li>
+                </ul>
+    </div>
+
+    <!-- Test cases -->
+    <div class="section">
+        <div class="section-title">Test cases</div>
+        <ul class="testcases">
+                        <li class="testcase">
+                <div class="testcase-no">0</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>existingNames</b>: { "MasterOfDisaster", "DingBat", "Orpheus", "WolfMan", "MrKnowItAll" }</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>newName</b>: "TygerTyger"</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">"TygerTyger"</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment">&quot;TygerTyger&quot; is available.</div>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">1</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>existingNames</b>: { "MasterOfDisaster", "TygerTyger1", "DingBat", "Orpheus", "TygerTyger", "WolfMan", "MrKnowItAll" }</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>newName</b>: "TygerTyger"</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">"TygerTyger2"</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment">&quot;TygerTyger&quot; and &quot;TygerTyger1&quot; are taken.</div>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">2</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>existingNames</b>: { "TygerTyger2000", "TygerTyger1", "MasterDisaster", "DingBat", "Orpheus", "WolfMan", "MrKnowItAll" }</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>newName</b>: "TygerTyger"</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">"TygerTyger"</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment">There are higher-numbered variants of &quot;TygerTyger&quot;, but the base name is available.</div>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">3</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>existingNames</b>: { "grokster2", "BrownEyedBoy", "Yoop", "BlueEyedGirl", "grokster", "Elemental", "NightShade", "Grokster1" }</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>newName</b>: "grokster"</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">"grokster1"</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment">Note that &quot;Grokster1&quot; is not the same as &quot;grokster1&quot;.</div>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">4</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>existingNames</b>: { "Bart4", "Bart5", "Bart6", "Bart7", "Bart8", "Bart9", "Bart10", "Lisa", "Marge", "Homer", "Bart", "Bart1", "Bart2", "Bart3", "Bart11", "Bart12" }</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>newName</b>: "Bart"</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">"Bart13"</span>
+                    </div>
+                                    </div>
+            </li>
+                    </ul>
+    </div>
+
+    <hr>
+
+    This problem statement is the exclusive and proprietary property of TopCoder, Inc. Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.
+</body>
+</html>
