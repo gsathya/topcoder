@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+
+	<style type="text/css">
+		body { font-family: Helvetica, Arial, Verdana, sans-serif; }
+		.heading { font-weight: bold; font-size: 28px; text-align: center; }
+		.section { padding-top: 10px; }
+		.section .section-title { font-weight: bold; font-size: 20px; color: grey; }
+        .problem-intro { padding-left: 20px; }
+        note, user-constraint { padding-left: 20px; }
+		type {
+			font-weight: bold;
+			font-family: monospace;
+		}
+		img {
+			float: none;
+			display: block;
+			width: 200px;
+			height: auto;
+			margin: 10px;
+			border: 0px solid #ccc;
+		}
+		ul {
+			list-style-type: none;
+			padding: 0px;
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		ul.constraints li:before {
+			content: "-";
+			font-size: 16px;
+			font-family: monospace;
+			position:relative;
+			margin-left: 0px; /* optional, for multiline li element */
+			left: 10px;
+		}
+		ul.notes li:before {
+			content: "~";
+			font-size: 16px;
+			font-family: monospace;
+			font-weight: normal;
+			position:relative;
+			margin-left: 0px; /* optional, for multiline li element */
+			left: 10px;
+		}
+
+		li.testcase {
+			display: flex;
+			line-height: 16px;
+			padding-top: 10px;
+			padding-bottom: 10px;
+		}
+		li.testcase div.testcase-no {
+            min-width: 16px;
+			width: 16px;
+			height: 16px;
+			font-size: 16px;
+			line-height: 16px;
+			padding: 8px;
+			margin-right: 10px;
+			border-radius: 100%;
+			font-weight: bold;
+			text-align: center;
+			vertical-align: top;
+			border: 2px solid #ddd;
+			color: grey;
+		}
+		li.testcase span {
+			vertical-align: middle; 
+			text-align: center;
+			height: 15px;
+			line-height: 16px;
+			min-width: 45px;
+			border-radius: 5px;
+			padding: 0px;
+			padding-left: 5px;
+			padding-right: 5px;
+			margin-right: 10px;
+			display: inline-block;
+		}
+		li.testcase > .testcase-content > div { padding-bottom: 8px; }
+		li.testcase .tag {
+			background: #545454;
+			color: white;
+			font-family: Georgia;
+			font-size: 10px;
+			text-align: center;
+		}
+		li.testcase .testcase-input .tag { visibility: hidden; }
+		li.testcase .testcase-input .tag:first-child { visibility: visible; }
+		li.testcase .data {
+			background: #eee;
+			font-family: monospace;
+		}
+        li.testcase .testcase-comment {
+            margin: 0;
+            padding-left: 5px;
+        }
+        .testcase-comment p:first-child { margin-top: 0; }
+        .testcase-comment p:last-child { margin-bottom: 0; }
+	</style>
+
+    <title>Topcoder - SRM 192 - Problem 250</title>
+</head>
+
+<body>
+	<div class="heading">
+        SRM 192 Div 2 - Problem 250 <br/>
+        BoxLoader
+    </div>
+
+	<hr/>
+
+    <!-- Problem Statemnt -->
+    <div class="section">
+        <div class="section-title">Problem Statement</div>
+        <div class="problem-intro">
+            <intro><p>Your company has a new box loading robot. It is your job to program it to pack items into the shipping boxes. The robot does not have a very large program memory so you are restricted to placing all the items into the boxes in the same orientation. Each item is a rectangular solid with dimensions <b>itemX</b> by <b>itemY</b> by <b>itemZ</b>. The box is also rectangular with the dimensions <b>boxX</b> by <b>boxY</b> by <b>boxZ</b>. The items can be placed in the box in any orthogonal orientation (ie. the sides of the items must be parallel to the sides of the box), but only whole items can be placed in the box.
+Your task here is to determine the greatest number of items that can be packed into the box (with all the items in the same orientation).</p>
+
+<p>
+For example, if the box is 100x98x81 units and the items are 3x5x7 units, then orienting the items so they are 5x7x3, allows them to fit in the box in a 20x14x27 grid, filling the entire box, which is optimal: 7560 items.</p></intro>
+        </div>
+    </div>
+
+    <!-- Notes -->
+    <div class="section">
+        <div class="section-title">Notes</div>
+        <ul class="notes">
+                    <li><note>There are six possible orientations for an item.</note></li>
+                </ul>
+    </div>
+
+    <!-- Constraints -->
+    <div class="section">
+        <div class="section-title">Constraints</div>
+        <ul class="constraints">
+                    <li><user-constraint><b>boxX</b>, <b>boxY</b> and <b>boxZ</b> will be between 1 and 1000 inclusive.</user-constraint></li>
+                    <li><user-constraint><b>itemX</b>, <b>itemY</b> and <b>itemZ</b> will be between 1 and 1000 inclusive.</user-constraint></li>
+                </ul>
+    </div>
+
+    <!-- Test cases -->
+    <div class="section">
+        <div class="section-title">Test cases</div>
+        <ul class="testcases">
+                        <li class="testcase">
+                <div class="testcase-no">0</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>boxX</b>: 100</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>boxY</b>: 98</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>boxZ</b>: 81</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>itemX</b>: 3</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>itemY</b>: 5</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>itemZ</b>: 7</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">7560</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment">The example from above.</div>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">1</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>boxX</b>: 10</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>boxY</b>: 10</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>boxZ</b>: 10</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>itemX</b>: 9</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>itemY</b>: 9</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>itemZ</b>: 11</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">0</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment">That's not going to fit!</div>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">2</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>boxX</b>: 201</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>boxY</b>: 101</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>boxZ</b>: 301</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>itemX</b>: 100</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>itemY</b>: 30</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>itemZ</b>: 20</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">100</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment">There is going to be some empty space in this box, as none of the box dimensions is an exact multiple of an item dimension. Orienting the items so that the 30 unit dimension goes in the box's 301 unit direction wastes the
+least space. 10 items can fit leaving only one unit of waste in that dimension.</div>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">3</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>boxX</b>: 913</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>boxY</b>: 687</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>boxZ</b>: 783</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>itemX</b>: 109</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>itemY</b>: 93</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>itemZ</b>: 53</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">833</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment">A less obvious example of minimizing the wasted space.</div>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">4</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>boxX</b>: 6</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>boxY</b>: 5</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>boxZ</b>: 4</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>itemX</b>: 3</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>itemY</b>: 2</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>itemZ</b>: 1</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">20</span>
+                    </div>
+                                    </div>
+            </li>
+                    </ul>
+    </div>
+
+    <hr>
+
+    This problem statement is the exclusive and proprietary property of TopCoder, Inc. Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.
+</body>
+</html>

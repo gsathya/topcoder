@@ -1,20 +1,12 @@
 # -*- coding: utf-8 -*-
 import math,string,itertools,fractions,heapq,collections,re,array,bisect
 
-class UserName:
-    def newMember(self, existingNames, newName):
-        h = {}
-        for i in existingNames:
-            h[i] = True
-
-        s = 1
-
-        if not h.has_key(newName): return newName
-            
-        while True:
-            if not h.has_key(newName+str(s)):
-                return newName+str(s)
-            s+=1
+class BettingMoney:
+    def moneyMade(self, amounts, centsPerDollar, finalResult):
+        gained = sum(amounts) - amounts[finalResult]
+        gained = gained*100
+        lost = centsPerDollar[finalResult]*amounts[finalResult]
+        return gained-lost
 
 # CUT begin
 # TEST CODE FOR PYTHON {{{
@@ -44,12 +36,12 @@ def pretty_str(x):
     else:
         return str(x)
 
-def do_test(existingNames, newName, __expected):
+def do_test(amounts, centsPerDollar, finalResult, __expected):
     startTime = time.time()
-    instance = UserName()
+    instance = BettingMoney()
     exception = None
     try:
-        __result = instance.newMember(existingNames, newName);
+        __result = instance.moneyMade(amounts, centsPerDollar, finalResult);
     except:
         import traceback
         exception = traceback.format_exc()
@@ -70,34 +62,38 @@ def do_test(existingNames, newName, __expected):
         return 0
 
 def run_tests():
-    sys.stdout.write("UserName (250 Points)\n\n")
+    sys.stdout.write("BettingMoney (250 Points)\n\n")
 
     passed = cases = 0
     case_set = set()
     for arg in sys.argv[1:]:
         case_set.add(int(arg))
 
-    with open("UserName.sample", "r") as f:
+    with open("BettingMoney.sample", "r") as f:
         while True:
             label = f.readline()
             if not label.startswith("--"): break
 
-            existingNames = []
+            amounts = []
             for i in range(0, int(f.readline())):
-                existingNames.append(f.readline().rstrip())
-            existingNames = tuple(existingNames)
-            newName = f.readline().rstrip()
+                amounts.append(int(f.readline().rstrip()))
+            amounts = tuple(amounts)
+            centsPerDollar = []
+            for i in range(0, int(f.readline())):
+                centsPerDollar.append(int(f.readline().rstrip()))
+            centsPerDollar = tuple(centsPerDollar)
+            finalResult = int(f.readline().rstrip())
             f.readline()
-            __answer = f.readline().rstrip()
+            __answer = int(f.readline().rstrip())
 
             cases += 1
             if len(case_set) > 0 and (cases - 1) in case_set: continue
             sys.stdout.write("  Testcase #%d ... " % (cases - 1))
-            passed += do_test(existingNames, newName, __answer)
+            passed += do_test(amounts, centsPerDollar, finalResult, __answer)
 
     sys.stdout.write("\nPassed : %d / %d cases\n" % (passed, cases))
 
-    T = time.time() - 1387398476
+    T = time.time() - 1387430529
     PT, TT = (T / 60.0, 75.0)
     points = 250 * (0.3 + (0.7 * TT * TT) / (10.0 * PT * PT + TT * TT))
     sys.stdout.write("Time   : %d minutes %d secs\n" % (int(T/60), T%60))
