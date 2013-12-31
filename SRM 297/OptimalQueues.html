@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+
+	<style type="text/css">
+		body { font-family: Helvetica, Arial, Verdana, sans-serif; }
+		.heading { font-weight: bold; font-size: 28px; text-align: center; }
+		.section { padding-top: 10px; }
+		.section .section-title { font-weight: bold; font-size: 20px; color: grey; }
+        .problem-intro { padding-left: 20px; }
+        note, user-constraint { padding-left: 20px; }
+		type {
+			font-weight: bold;
+			font-family: monospace;
+		}
+		img {
+			float: none;
+			display: block;
+			width: 200px;
+			height: auto;
+			margin: 10px;
+			border: 0px solid #ccc;
+		}
+		ul {
+			list-style-type: none;
+			padding: 0px;
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		ul.constraints li:before {
+			content: "-";
+			font-size: 16px;
+			font-family: monospace;
+			position:relative;
+			margin-left: 0px; /* optional, for multiline li element */
+			left: 10px;
+		}
+		ul.notes li:before {
+			content: "~";
+			font-size: 16px;
+			font-family: monospace;
+			font-weight: normal;
+			position:relative;
+			margin-left: 0px; /* optional, for multiline li element */
+			left: 10px;
+		}
+
+		li.testcase {
+			display: flex;
+			line-height: 16px;
+			padding-top: 10px;
+			padding-bottom: 10px;
+		}
+		li.testcase div.testcase-no {
+            min-width: 16px;
+			width: 16px;
+			height: 16px;
+			font-size: 16px;
+			line-height: 16px;
+			padding: 8px;
+			margin-right: 10px;
+			border-radius: 100%;
+			font-weight: bold;
+			text-align: center;
+			vertical-align: top;
+			border: 2px solid #ddd;
+			color: grey;
+		}
+		li.testcase span {
+			vertical-align: middle; 
+			text-align: center;
+			height: 15px;
+			line-height: 16px;
+			min-width: 45px;
+			border-radius: 5px;
+			padding: 0px;
+			padding-left: 5px;
+			padding-right: 5px;
+			margin-right: 10px;
+			display: inline-block;
+		}
+		li.testcase > .testcase-content > div { padding-bottom: 8px; }
+		li.testcase .tag {
+			background: #545454;
+			color: white;
+			font-family: Georgia;
+			font-size: 10px;
+			text-align: center;
+		}
+		li.testcase .testcase-input .tag { visibility: hidden; }
+		li.testcase .testcase-input .tag:first-child { visibility: visible; }
+		li.testcase .data {
+			background: #eee;
+			font-family: monospace;
+		}
+        li.testcase .testcase-comment {
+            margin: 0;
+            padding-left: 5px;
+        }
+        .testcase-comment p:first-child { margin-top: 0; }
+        .testcase-comment p:last-child { margin-bottom: 0; }
+	</style>
+
+    <title>Topcoder - SRM 297 - Problem 500</title>
+</head>
+
+<body>
+	<div class="heading">
+        SRM 297 Div 2 - Problem 500 <br/>
+        OptimalQueues
+    </div>
+
+	<hr/>
+
+    <!-- Problem Statemnt -->
+    <div class="section">
+        <div class="section-title">Problem Statement</div>
+        <div class="problem-intro">
+            <intro><p>
+It is the beginning of the day at a bank, and a crowd of clients is already waiting for the entrance door to open. Once the bank opens, no more clients arrive, and <b>tellerCount</b> tellers begin serving the clients. A teller takes <b>serviceTime</b> minutes to serve each client. <b>clientArrivals</b> specifies how long each client has already been waiting at the moment when the bank door opens. Your program should determine the best way to arrange the clients into <b>tellerCount</b> queues, so that the waiting time of the client who waits longest is minimized. The waiting time of a client is the sum of the time the client waited outside before the bank opened, the time the client waited in a queue once the bank opened until the service began, and the service time of the client.
+</p>
+<p>
+Return the minimum waiting time for the client who waits the longest.
+</p>
+</intro>
+        </div>
+    </div>
+
+    <!-- Notes -->
+    <div class="section">
+        <div class="section-title">Notes</div>
+        <ul class="notes">
+                </ul>
+    </div>
+
+    <!-- Constraints -->
+    <div class="section">
+        <div class="section-title">Constraints</div>
+        <ul class="constraints">
+                    <li><user-constraint><b>clientArrivals</b> will contain between 1 and 50 elements, inclusive.</user-constraint></li>
+                    <li><user-constraint>Each element in <b>clientArrivals</b> will be 0 and 100, inclusive.</user-constraint></li>
+                    <li><user-constraint><b>tellerCount</b> will be between 1 and 50, inclusive.</user-constraint></li>
+                    <li><user-constraint><b>serviceTime</b> will be between 1 and 100, inclusive.</user-constraint></li>
+                </ul>
+    </div>
+
+    <!-- Test cases -->
+    <div class="section">
+        <div class="section-title">Test cases</div>
+        <ul class="testcases">
+                        <li class="testcase">
+                <div class="testcase-no">0</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>clientArrivals</b>: { 1, 2 }</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>tellerCount</b>: 1</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>serviceTime</b>: 10</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">21</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment">If the client who waited 1 minute goes first, the second client will have to wait 2 + 10 + 10 = 22 minutes in total. It is better for the client who waited 2 minutes to go first because then the waiting times are 12 and 21.</div>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">1</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>clientArrivals</b>: { 10 }</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>tellerCount</b>: 50</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>serviceTime</b>: 50</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">60</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment">There is only one client who has waited 10 minutes, and the service time is 50 minutes, so the answer is 10 + 50 = 60.</div>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">2</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>clientArrivals</b>: { 10, 10, 10 }</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>tellerCount</b>: 2</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>serviceTime</b>: 20</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">50</span>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">3</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>clientArrivals</b>: { 2, 4, 6, 3, 5 }</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>tellerCount</b>: 3</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>serviceTime</b>: 10</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">23</span>
+                    </div>
+                                    </div>
+            </li>
+                    </ul>
+    </div>
+
+    <hr>
+
+    This problem statement is the exclusive and proprietary property of TopCoder, Inc. Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.
+</body>
+</html>
