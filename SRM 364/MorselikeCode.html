@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+
+	<style type="text/css">
+		body { font-family: Helvetica, Arial, Verdana, sans-serif; }
+		.heading { font-weight: bold; font-size: 28px; text-align: center; }
+		.section { padding-top: 10px; }
+		.section .section-title { font-weight: bold; font-size: 20px; color: grey; }
+        .problem-intro { padding-left: 20px; }
+        note, user-constraint { padding-left: 20px; }
+		type {
+			font-weight: bold;
+			font-family: monospace;
+		}
+		img {
+			float: none;
+			display: block;
+			width: 200px;
+			height: auto;
+			margin: 10px;
+			border: 0px solid #ccc;
+		}
+		ul {
+			list-style-type: none;
+			padding: 0px;
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		ul.constraints li:before {
+			content: "-";
+			font-size: 16px;
+			font-family: monospace;
+			position:relative;
+			margin-left: 0px; /* optional, for multiline li element */
+			left: 10px;
+		}
+		ul.notes li:before {
+			content: "~";
+			font-size: 16px;
+			font-family: monospace;
+			font-weight: normal;
+			position:relative;
+			margin-left: 0px; /* optional, for multiline li element */
+			left: 10px;
+		}
+
+		li.testcase {
+			display: flex;
+			line-height: 16px;
+			padding-top: 10px;
+			padding-bottom: 10px;
+		}
+		li.testcase div.testcase-no {
+            min-width: 16px;
+			width: 16px;
+			height: 16px;
+			font-size: 16px;
+			line-height: 16px;
+			padding: 8px;
+			margin-right: 10px;
+			border-radius: 100%;
+			font-weight: bold;
+			text-align: center;
+			vertical-align: top;
+			border: 2px solid #ddd;
+			color: grey;
+		}
+		li.testcase span {
+			vertical-align: middle; 
+			text-align: center;
+			height: 15px;
+			line-height: 16px;
+			min-width: 45px;
+			border-radius: 5px;
+			padding: 0px;
+			padding-left: 5px;
+			padding-right: 5px;
+			margin-right: 10px;
+			display: inline-block;
+		}
+		li.testcase > .testcase-content > div { padding-bottom: 8px; }
+		li.testcase .tag {
+			background: #545454;
+			color: white;
+			font-family: Georgia;
+			font-size: 10px;
+			text-align: center;
+		}
+		li.testcase .testcase-input .tag { visibility: hidden; }
+		li.testcase .testcase-input .tag:first-child { visibility: visible; }
+		li.testcase .data {
+			background: #eee;
+			font-family: monospace;
+		}
+        li.testcase .testcase-comment {
+            margin: 0;
+            padding-left: 5px;
+        }
+        .testcase-comment p:first-child { margin-top: 0; }
+        .testcase-comment p:last-child { margin-bottom: 0; }
+	</style>
+
+    <title>Topcoder - SRM 364 - Problem 250</title>
+</head>
+
+<body>
+	<div class="heading">
+        SRM 364 Div 2 - Problem 250 <br/>
+        MorselikeCode
+    </div>
+
+	<hr/>
+
+    <!-- Problem Statemnt -->
+    <div class="section">
+        <div class="section-title">Problem Statement</div>
+        <div class="problem-intro">
+            <intro escaped="1"><p>
+Marge is rather concerned about the hoodlums that her son has been spending time with.  Aside from all of the time spent at the arcade, they communicate with each other through encrypted messages.  As a concerned parent, Marge wants to discover what the boys are talking about.
+</p><p>
+Marge knows parts of the boys' code <b>library</b>, given as a <type>String[]</type>.  Each element is formatted as &quot;C SEQUENCE&quot; (quotes for clarity), where C is an uppercase letter, SEQUENCE consists of only '-' and '.' characters, and exactly one space separates the two.  When writing their message, the boys will replace C with SEQUENCE, separating multiple letters with spaces.  So, if O is represented as &quot;---&quot; and S is represented as &quot;...&quot;, then the message &quot;SOS&quot; can be encoded as &quot;... --- ...&quot;.
+</p><p>
+Marge has recovered an encoded <b>message</b> that she would like to decode.  Unfortunately, she does not have a full copy of the <b>library</b>, so there may be some SEQUENCEs that do not correspond to any entries in the <b>library</b>; if this happens, you are to replace it with a '?' (Marge is a smart mom, and might be able to figure out what the word is with only partial information).  You are to return a <type>String</type> containing the decoded message.
+</p></intro>
+        </div>
+    </div>
+
+    <!-- Notes -->
+    <div class="section">
+        <div class="section-title">Notes</div>
+        <ul class="notes">
+                </ul>
+    </div>
+
+    <!-- Constraints -->
+    <div class="section">
+        <div class="section-title">Constraints</div>
+        <ul class="constraints">
+                    <li><user-constraint escaped="1"><b>library</b> will contain between 1 and 50 elements, inclusive.</user-constraint></li>
+                    <li><user-constraint escaped="1">Each element of <b>library</b> will contain between 3 and 50 characters, inclusive.</user-constraint></li>
+                    <li><user-constraint escaped="1">Each element of <b>library</b> will be formatted as &quot;C SEQUENCE&quot; as described in the problem statement.</user-constraint></li>
+                    <li><user-constraint escaped="1">In each element of <b>library</b>, C will be an uppercase letter ('A'-'Z').</user-constraint></li>
+                    <li><user-constraint escaped="1">In each element of <b>library</b>, SEQUENCE will consist only of '.' and '-'.</user-constraint></li>
+                    <li><user-constraint escaped="1">There will be no duplicate SEQUENCEs in <b>library</b>.</user-constraint></li>
+                    <li><user-constraint escaped="1"><b>message</b> will contain between 1 and 50 characters, inclusive.</user-constraint></li>
+                    <li><user-constraint escaped="1">Each character of <b>message</b> will be '-', '.', or a space (' ').</user-constraint></li>
+                    <li><user-constraint escaped="1">There will be no leading, trailing, or consecutive spaces in <b>message</b>.</user-constraint></li>
+                </ul>
+    </div>
+
+    <!-- Test cases -->
+    <div class="section">
+        <div class="section-title">Test cases</div>
+        <ul class="testcases">
+                        <li class="testcase">
+                <div class="testcase-no">0</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>library</b>: { "O ---", "S ..." }</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>message</b>: "... --- ..."</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">"SOS"</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment">The example from the problem statement.</div>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">1</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>library</b>: { "O ---" }</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>message</b>: "... --- ..."</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">"?O?"</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment">This time we don't have the S, so we replace the three dashes with question marks.</div>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">2</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>library</b>: { "H -", "E .", "L --", "L ..", "O -." }</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>message</b>: "- . -- .. -."</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">"HELLO"</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment">Note that the clever boys can have multiple ways to encode the same letter.</div>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">3</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>library</b>: { "H -.-.-.-.-.-.-.-.-.-.", "I .-.-.-.-.-.-.-.-.-.-", "K -.-.-.-.-.", "E .-.-.-.-.-" }</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>message</b>: "-.-.-.-.-.-.-.-.-.-. .-.-.-.-.-.-.-.-.-.-"</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">"HI"</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment">A long message doesn't always mean a long word.</div>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">4</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>library</b>: { "O ---", "S ...", "B -...", "T -", "R .-.", "E .", "N -.", "X -..-", "D -.." }</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>message</b>: "-... --- ... - --- -. .-. . -.. ... --- -..-"</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">"BOSTONREDSOX"</span>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">5</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>library</b>: { "B -...", "N -.", "H ....", "O --", "Z --..", "G ---", "I ..", "J .---" }</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>message</b>: "--- -- -... .- -. .- -. .-"</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">"GOB?N?N?"</span>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">6</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>library</b>: { "A --", "B -.", "N ...-", "I --..", "F -.-.-." }</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>message</b>: "-. -- -.-.-. -.-.-. --- --.. ...- .-..--."</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">"BAFF?IN?"</span>
+                    </div>
+                                    </div>
+            </li>
+                    </ul>
+    </div>
+
+    <hr>
+
+    This problem statement is the exclusive and proprietary property of TopCoder, Inc. Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.
+</body>
+</html>

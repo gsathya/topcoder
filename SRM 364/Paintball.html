@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+
+	<style type="text/css">
+		body { font-family: Helvetica, Arial, Verdana, sans-serif; }
+		.heading { font-weight: bold; font-size: 28px; text-align: center; }
+		.section { padding-top: 10px; }
+		.section .section-title { font-weight: bold; font-size: 20px; color: grey; }
+        .problem-intro { padding-left: 20px; }
+        note, user-constraint { padding-left: 20px; }
+		type {
+			font-weight: bold;
+			font-family: monospace;
+		}
+		img {
+			float: none;
+			display: block;
+			width: 200px;
+			height: auto;
+			margin: 10px;
+			border: 0px solid #ccc;
+		}
+		ul {
+			list-style-type: none;
+			padding: 0px;
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		ul.constraints li:before {
+			content: "-";
+			font-size: 16px;
+			font-family: monospace;
+			position:relative;
+			margin-left: 0px; /* optional, for multiline li element */
+			left: 10px;
+		}
+		ul.notes li:before {
+			content: "~";
+			font-size: 16px;
+			font-family: monospace;
+			font-weight: normal;
+			position:relative;
+			margin-left: 0px; /* optional, for multiline li element */
+			left: 10px;
+		}
+
+		li.testcase {
+			display: flex;
+			line-height: 16px;
+			padding-top: 10px;
+			padding-bottom: 10px;
+		}
+		li.testcase div.testcase-no {
+            min-width: 16px;
+			width: 16px;
+			height: 16px;
+			font-size: 16px;
+			line-height: 16px;
+			padding: 8px;
+			margin-right: 10px;
+			border-radius: 100%;
+			font-weight: bold;
+			text-align: center;
+			vertical-align: top;
+			border: 2px solid #ddd;
+			color: grey;
+		}
+		li.testcase span {
+			vertical-align: middle; 
+			text-align: center;
+			height: 15px;
+			line-height: 16px;
+			min-width: 45px;
+			border-radius: 5px;
+			padding: 0px;
+			padding-left: 5px;
+			padding-right: 5px;
+			margin-right: 10px;
+			display: inline-block;
+		}
+		li.testcase > .testcase-content > div { padding-bottom: 8px; }
+		li.testcase .tag {
+			background: #545454;
+			color: white;
+			font-family: Georgia;
+			font-size: 10px;
+			text-align: center;
+		}
+		li.testcase .testcase-input .tag { visibility: hidden; }
+		li.testcase .testcase-input .tag:first-child { visibility: visible; }
+		li.testcase .data {
+			background: #eee;
+			font-family: monospace;
+		}
+        li.testcase .testcase-comment {
+            margin: 0;
+            padding-left: 5px;
+        }
+        .testcase-comment p:first-child { margin-top: 0; }
+        .testcase-comment p:last-child { margin-bottom: 0; }
+	</style>
+
+    <title>Topcoder - SRM 364 - Problem 600</title>
+</head>
+
+<body>
+	<div class="heading">
+        SRM 364 Div 2 - Problem 600 <br/>
+        Paintball
+    </div>
+
+	<hr/>
+
+    <!-- Problem Statemnt -->
+    <div class="section">
+        <div class="section-title">Problem Statement</div>
+        <div class="problem-intro">
+            <intro escaped="1"><p>
+For his birthday, Bart received the brand new video game &quot;Paintball!&quot;.  In this game, a person plays on teams over the Internet against various competitors, attempting to hit their opponents with paint balls.  Each player earns a point each time that they &quot;splatter&quot; an opponent with a paintball, and lose a point for each time they get &quot;splattered&quot;.  Due to the way that the game is played, it is also possible to accidentally splatter yourself or a teammate.  In that case, the shooter loses a point, and the person who was splattered (if not the shooter) does not lose any points.  A team's score is simply the sum of the scores of its players.
+</p><p>
+Although Bart loves the game, he is disappointed that the game does not provide a leaderboard during gameplay.  However, it does provide the list of <b>players</b>, formatted as &quot;NAME TEAM&quot; (where NAME is the player's name, and TEAM is his team), and a series of <b>messages</b>, each formatted as &quot;NAME1 SPLATTERED NAME2&quot; (all quotes for clarity), where NAME1 indicates the name of the person who shot the paintball, and NAME2 indicates the name of the person who got splattered.  Bart would like to have an updated scoreboard, and that is where you come in.
+</p><p>
+All teams will receive a rank number from 1 to M (the total number of teams), based on the team scores (with 1 corresponding to the highest score).  If multiple teams have the same score, then the team with the name that comes first alphabetically will receive a lower rank number.  For each team (in order from 1 to M), its leaderboard entry will be formatted as follows:
+<ol>
+<li>The first line will be &quot;TEAM SCORE&quot; (quotes for clarity), where TEAM is the team name, and SCORE is the team score (with no extra leading zeroes).</li>
+<li>Let N be the number of players on the team.  Assign rank numbers to the N players from 1 to N, giving a lower rank number to a higher score.  If multiple players have the same score, assign the player whose name comes first alphabetically to the lower rank number.</li>
+<li>From the player with rank 1 to rank N, output a line with 2 spaces, the player's name, a single space, and then the player's score (with no extra leading zeroes).</li>  
+</ol>
+Thus, if player A from team RED splatters player B from team BLUE (and they are the only players in the game), the leaderboard will be:
+</p><pre>
+RED 1
+  A 1
+BLUE -1
+  B -1
+</pre><p>
+You are to generate the leaderboard and return it.
+</p></intro>
+        </div>
+    </div>
+
+    <!-- Notes -->
+    <div class="section">
+        <div class="section-title">Notes</div>
+        <ul class="notes">
+                    <li><note escaped="1">A SCORE of 0 should be output as 0, not as -0.</note></li>
+                </ul>
+    </div>
+
+    <!-- Constraints -->
+    <div class="section">
+        <div class="section-title">Constraints</div>
+        <ul class="constraints">
+                    <li><user-constraint escaped="1"><b>players</b> will contain between 1 and 50 elements, inclusive.</user-constraint></li>
+                    <li><user-constraint escaped="1">Each element of <b>players</b> will contain between 3 and 50 characters, inclusive.</user-constraint></li>
+                    <li><user-constraint escaped="1">Each element of <b>players</b> will be formatted as &quot;NAME TEAM&quot; (quotes for clarity).</user-constraint></li>
+                    <li><user-constraint escaped="1">In each element of <b>players</b>, NAME will consist of uppercase characters ('A'-'Z') and will contain at least 1 character.</user-constraint></li>
+                    <li><user-constraint escaped="1">There will be no duplicate NAMEs in <b>players</b>.</user-constraint></li>
+                    <li><user-constraint escaped="1">In each element of <b>players</b>, TEAM will consist of uppercase characters ('A'-'Z') and will contain at least 1 character.</user-constraint></li>
+                    <li><user-constraint escaped="1"><b>messages</b> will contain between 1 and 50 elements, inclusive.</user-constraint></li>
+                    <li><user-constraint escaped="1">Each element of <b>messages</b> will contain between 14 and 50 characters, inclusive.</user-constraint></li>
+                    <li><user-constraint escaped="1">Each element of <b>messages</b> will be formatted as described in the problem statement.</user-constraint></li>
+                    <li><user-constraint escaped="1">In each element of <b>messages</b>, NAME1 and NAME2 will be NAMEs found in <b>players</b>.</user-constraint></li>
+                </ul>
+    </div>
+
+    <!-- Test cases -->
+    <div class="section">
+        <div class="section-title">Test cases</div>
+        <ul class="testcases">
+                        <li class="testcase">
+                <div class="testcase-no">0</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>players</b>: { "A RED", "B BLUE" }</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>messages</b>: { "A SPLATTERED B" }</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">{ "RED 1", "  A 1", "BLUE -1", "  B -1" }</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment">The example from the statement.</div>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">1</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>players</b>: { "LISA RED", "BART RED", "HOMER BLUE", "MARGE BLUE", "MAGGIE GREEN" }</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>messages</b>: { "MAGGIE SPLATTERED HOMER", "MAGGIE SPLATTERED MARGE" }</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">{ "GREEN 2", "  MAGGIE 2", "RED 0", "  BART 0", "  LISA 0", "BLUE -2", "  HOMER -1", "  MARGE -1" }</span>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">2</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>players</b>: { "TODD STRIKEFORCE", "BART OMEGA", "DATA STRIKEFORCE", "MILHOUSE OMEGA", "NELSON DISCOVERYCHANNEL", "MARTIN DISCOVERYCHANNEL" }</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>messages</b>: { "BART SPLATTERED MARTIN", "TODD SPLATTERED MARTIN" }</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">{ "OMEGA 1", "  BART 1", "  MILHOUSE 0", "STRIKEFORCE 1", "  TODD 1", "  DATA 0", "DISCOVERYCHANNEL -2", "  NELSON 0", "  MARTIN -2" }</span>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">3</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>players</b>: { "DR COHO", "ST COHO", "PE COHO" }</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>messages</b>: { "DR SPLATTERED ST", "ST SPLATTERED PE" }</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">{ "COHO -2", "  PE 0", "  DR -1", "  ST -1" }</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment">Don't shoot your teammates!</div>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">4</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>players</b>: { "A B", "AA AA", "AAA AAA" }</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>messages</b>: { "A SPLATTERED AAA", "A SPLATTERED AAA", "A SPLATTERED AAA", "AA SPLATTERED AAA", "AA SPLATTERED AAA" }</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">{ "B 3", "  A 3", "AA 2", "  AA 2", "AAA -5", "  AAA -5" }</span>
+                    </div>
+                                    </div>
+            </li>
+                    </ul>
+    </div>
+
+    <hr>
+
+    This problem statement is the exclusive and proprietary property of TopCoder, Inc. Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.
+</body>
+</html>
