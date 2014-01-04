@@ -10,13 +10,14 @@ class BinPackingEasy:
         start = 0
         end = len(items)-1
 
+        while start<=end and start< len(items) and items[start] > 199:
+            ans+=1
+            start+=1
+        while start<=end and end > 0 and items[end] > 199:
+            ans+=1
+            end-=1
+
         while start <= end:
-            while start< len(items) and items[start] > 199:
-                ans+=1
-                start+=1
-            while end > 0 and items[end] > 199:
-                ans+=1
-                end-=1
             if items[start] + items[end] < 301:
                 ans+=1
                 start+=1
