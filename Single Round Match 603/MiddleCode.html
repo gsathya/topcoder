@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+
+	<style type="text/css">
+		body { font-family: Helvetica, Arial, Verdana, sans-serif; }
+		.heading { font-weight: bold; font-size: 28px; text-align: center; }
+		.section { padding-top: 10px; }
+		.section .section-title { font-weight: bold; font-size: 20px; color: grey; }
+        .problem-intro { padding-left: 20px; }
+        note, user-constraint { padding-left: 20px; }
+		type {
+			font-weight: bold;
+			font-family: monospace;
+		}
+		img {
+			float: none;
+			display: block;
+			width: 200px;
+			height: auto;
+			margin: 10px;
+			border: 0px solid #ccc;
+		}
+		ul {
+			list-style-type: none;
+			padding: 0px;
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		ul.constraints li:before {
+			content: "-";
+			font-size: 16px;
+			font-family: monospace;
+			position:relative;
+			margin-left: 0px; /* optional, for multiline li element */
+			left: 10px;
+		}
+		ul.notes li:before {
+			content: "~";
+			font-size: 16px;
+			font-family: monospace;
+			font-weight: normal;
+			position:relative;
+			margin-left: 0px; /* optional, for multiline li element */
+			left: 10px;
+		}
+
+		li.testcase {
+			display: flex;
+			line-height: 16px;
+			padding-top: 10px;
+			padding-bottom: 10px;
+		}
+		li.testcase div.testcase-no {
+            min-width: 16px;
+			width: 16px;
+			height: 16px;
+			font-size: 16px;
+			line-height: 16px;
+			padding: 8px;
+			margin-right: 10px;
+			border-radius: 100%;
+			font-weight: bold;
+			text-align: center;
+			vertical-align: top;
+			border: 2px solid #ddd;
+			color: grey;
+		}
+		li.testcase span {
+			vertical-align: middle; 
+			text-align: center;
+			height: 15px;
+			line-height: 16px;
+			min-width: 45px;
+			border-radius: 5px;
+			padding: 0px;
+			padding-left: 5px;
+			padding-right: 5px;
+			margin-right: 10px;
+			display: inline-block;
+		}
+		li.testcase > .testcase-content > div { padding-bottom: 8px; }
+		li.testcase .tag {
+			background: #545454;
+			color: white;
+			font-family: Georgia;
+			font-size: 10px;
+			text-align: center;
+		}
+		li.testcase .testcase-input .tag { visibility: hidden; }
+		li.testcase .testcase-input .tag:first-child { visibility: visible; }
+		li.testcase .data {
+			background: #eee;
+			font-family: monospace;
+		}
+        li.testcase .testcase-comment {
+            margin: 0;
+            padding-left: 5px;
+        }
+        .testcase-comment p:first-child { margin-top: 0; }
+        .testcase-comment p:last-child { margin-bottom: 0; }
+	</style>
+
+    <title>Topcoder - Single Round Match 603 - Problem 250</title>
+</head>
+
+<body>
+	<div class="heading">
+        Single Round Match 603 Div  - Problem 250 <br/>
+        MiddleCode
+    </div>
+
+	<hr/>
+
+    <!-- Problem Statemnt -->
+    <div class="section">
+        <div class="section-title">Problem Statement</div>
+        <div class="problem-intro">
+            <intro escaped="1">Hero is learning a new algorithm to encode a string.
+You are given a <type>String</type> <b>s</b> that consists of lowercase letters only.
+Your task is to simulate the algorithm described below on this string, so that Hero can see how it works.
+<br></br><br></br>
+The algorithm starts with a given input string <b>s</b> and an empty output string t.
+The execution of the algorithm consists of multiple steps.
+In each step, <b>s</b> and t are modified as follows:
+<ul>
+<li>If the length of <b>s</b> is odd, the middle character of <b>s</b> is added to the end of t, and then deleted from <b>s</b>.</li>
+<li>If the length of <b>s</b> is even, the two characters in the middle of <b>s</b> are compared. The smaller one of them (either one in case of a tie) is added to the end of t, and then deleted from <b>s</b>.</li>
+</ul>
+If after some step the string <b>s</b> is empty, the algorithm terminates.
+The output of the algorithm is the final string t.
+<br></br><br></br>
+Return the <type>String</type> t that will be produced by the above algorithm for the given <type>String</type> <b>s</b>.</intro>
+        </div>
+    </div>
+
+    <!-- Notes -->
+    <div class="section">
+        <div class="section-title">Notes</div>
+        <ul class="notes">
+                    <li><note escaped="1">When comparing letters, the smaller one is the one earlier in the alphabet - i.e., the character with the smaller ASCII code.</note></li>
+                </ul>
+    </div>
+
+    <!-- Constraints -->
+    <div class="section">
+        <div class="section-title">Constraints</div>
+        <ul class="constraints">
+                    <li><user-constraint escaped="1"><b>s</b> will contain between 1 and 50 characters, inclusive.</user-constraint></li>
+                    <li><user-constraint escaped="1">Each character in <b>s</b> will be a lowercase letter ('a'-'z').</user-constraint></li>
+                </ul>
+    </div>
+
+    <!-- Test cases -->
+    <div class="section">
+        <div class="section-title">Test cases</div>
+        <ul class="testcases">
+                        <li class="testcase">
+                <div class="testcase-no">0</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>s</b>: "word"</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">"ordw"</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment"><ul>
+<li>In the first step, 'o' is smaller than 'r', thus 'o' is selected.</li>
+<li>After the first step: <b>s</b>=&quot;wrd&quot;, t=&quot;o&quot;.</li>
+<li>After the second step: <b>s</b>=&quot;wd&quot;, t=&quot;or&quot;.</li>
+<li>In the third step, 'w' is greater than 'd', thus 'd' is selected.</li>
+<li>After the third step: <b>s</b>=&quot;w&quot;, t=&quot;ord&quot;.</li>
+<li>After the fourth step: <b>s</b>=&quot;&quot;, t=&quot;ordw&quot;, and the algorithm terminates.</li>
+</ul></div>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">1</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>s</b>: "aaaaa"</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">"aaaaa"</span>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">2</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>s</b>: "abacaba"</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">"caabbaa"</span>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">3</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>s</b>: "shjegr"</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">"ejghrs"</span>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">4</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>s</b>: "adafaaaadafawafwfasdaa"</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">"afawadafawafaafsadadaa"</span>
+                    </div>
+                                    </div>
+            </li>
+                    </ul>
+    </div>
+
+    <hr>
+
+    This problem statement is the exclusive and proprietary property of TopCoder, Inc. Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.
+</body>
+</html>

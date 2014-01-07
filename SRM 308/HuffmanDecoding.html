@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+
+	<style type="text/css">
+		body { font-family: Helvetica, Arial, Verdana, sans-serif; }
+		.heading { font-weight: bold; font-size: 28px; text-align: center; }
+		.section { padding-top: 10px; }
+		.section .section-title { font-weight: bold; font-size: 20px; color: grey; }
+        .problem-intro { padding-left: 20px; }
+        note, user-constraint { padding-left: 20px; }
+		type {
+			font-weight: bold;
+			font-family: monospace;
+		}
+		img {
+			float: none;
+			display: block;
+			width: 200px;
+			height: auto;
+			margin: 10px;
+			border: 0px solid #ccc;
+		}
+		ul {
+			list-style-type: none;
+			padding: 0px;
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		ul.constraints li:before {
+			content: "-";
+			font-size: 16px;
+			font-family: monospace;
+			position:relative;
+			margin-left: 0px; /* optional, for multiline li element */
+			left: 10px;
+		}
+		ul.notes li:before {
+			content: "~";
+			font-size: 16px;
+			font-family: monospace;
+			font-weight: normal;
+			position:relative;
+			margin-left: 0px; /* optional, for multiline li element */
+			left: 10px;
+		}
+
+		li.testcase {
+			display: flex;
+			line-height: 16px;
+			padding-top: 10px;
+			padding-bottom: 10px;
+		}
+		li.testcase div.testcase-no {
+            min-width: 16px;
+			width: 16px;
+			height: 16px;
+			font-size: 16px;
+			line-height: 16px;
+			padding: 8px;
+			margin-right: 10px;
+			border-radius: 100%;
+			font-weight: bold;
+			text-align: center;
+			vertical-align: top;
+			border: 2px solid #ddd;
+			color: grey;
+		}
+		li.testcase span {
+			vertical-align: middle; 
+			text-align: center;
+			height: 15px;
+			line-height: 16px;
+			min-width: 45px;
+			border-radius: 5px;
+			padding: 0px;
+			padding-left: 5px;
+			padding-right: 5px;
+			margin-right: 10px;
+			display: inline-block;
+		}
+		li.testcase > .testcase-content > div { padding-bottom: 8px; }
+		li.testcase .tag {
+			background: #545454;
+			color: white;
+			font-family: Georgia;
+			font-size: 10px;
+			text-align: center;
+		}
+		li.testcase .testcase-input .tag { visibility: hidden; }
+		li.testcase .testcase-input .tag:first-child { visibility: visible; }
+		li.testcase .data {
+			background: #eee;
+			font-family: monospace;
+		}
+        li.testcase .testcase-comment {
+            margin: 0;
+            padding-left: 5px;
+        }
+        .testcase-comment p:first-child { margin-top: 0; }
+        .testcase-comment p:last-child { margin-bottom: 0; }
+	</style>
+
+    <title>Topcoder - SRM 308 - Problem 450</title>
+</head>
+
+<body>
+	<div class="heading">
+        SRM 308 Div 2 - Problem 450 <br/>
+        HuffmanDecoding
+    </div>
+
+	<hr/>
+
+    <!-- Problem Statemnt -->
+    <div class="section">
+        <div class="section-title">Problem Statement</div>
+        <div class="problem-intro">
+            <intro><p>When text is encoded using Huffman codes, each symbol is replaced by a string of 0s and 1s called a bit string representation.  The replacement is done in such a way that the bit string representation of a symbol is never the prefix of the bit string representation of any other symbol.  This property allows us to unambiguously decode the encoded text.</p>
+<p>You will be given a <type>String</type> <b>archive</b> and a <type>String[]</type> <b>dictionary</b>. The i-th element of <b>dictionary</b> will be the bit string representation of the i-th uppercase letter. Decode <b>archive</b> using <b>dictionary</b> and return the result as a single <type>String</type>.</p></intro>
+        </div>
+    </div>
+
+    <!-- Notes -->
+    <div class="section">
+        <div class="section-title">Notes</div>
+        <ul class="notes">
+                </ul>
+    </div>
+
+    <!-- Constraints -->
+    <div class="section">
+        <div class="section-title">Constraints</div>
+        <ul class="constraints">
+                    <li><user-constraint><b>archive</b> will contain between 1 and 50 characters, inclusive. </user-constraint></li>
+                    <li><user-constraint><b>archive</b> will contain only the characters '0' (zero) and '1' (one).</user-constraint></li>
+                    <li><user-constraint><b>dictionary</b> will contain between 1 and 26 elements, inclusive. </user-constraint></li>
+                    <li><user-constraint>Each element of <b>dictionary</b> will contain between 1 and 50 characters, inclusive. </user-constraint></li>
+                    <li><user-constraint>Each element of <b>dictionary</b> will contain only the characters '0' (zero) and '1' (one).</user-constraint></li>
+                    <li><user-constraint>No element of <b>dictionary</b> will be a prefix of any other element of <b>dictionary</b>.</user-constraint></li>
+                    <li><user-constraint><b>archive</b> will be decodable using <b>dictionary</b></user-constraint></li>
+                </ul>
+    </div>
+
+    <!-- Test cases -->
+    <div class="section">
+        <div class="section-title">Test cases</div>
+        <ul class="testcases">
+                        <li class="testcase">
+                <div class="testcase-no">0</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>archive</b>: "101101"</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>dictionary</b>: { "00", "10", "01", "11" }</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">"BDC"</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment">Because there are no elements in dictionary that are prefixes of other elements, only one element of dictionary will be a prefix of <b>archive</b>.  In this case, it is the second element (&quot;10&quot;) which represents 'B'.  The rest of the text can be decoded using the same logic.</div>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">1</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>archive</b>: "10111010"</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>dictionary</b>: { "0", "111", "10" }</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">"CBAC"</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment">Note that elements of <b>dictionary</b> can be of different lengths.</div>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">2</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>archive</b>: "0001001100100111001"</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>dictionary</b>: { "1", "0" }</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">"BBBABBAABBABBAAABBA"</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment">'1' is replaced by 'A', '0' is replaced by 'B'.</div>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">3</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>archive</b>: "111011011000100110"</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>dictionary</b>: { "010", "00", "0110", "0111", "11", "100", "101" }</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">"EGGFAC"</span>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">4</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>archive</b>: "001101100101100110111101011001011001010"</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>dictionary</b>: { "110", "011", "10", "0011", "00011", "111", "00010", "0010", "010", "0000" }</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">"DBHABBACAIAIC"</span>
+                    </div>
+                                    </div>
+            </li>
+                    </ul>
+    </div>
+
+    <hr>
+
+    This problem statement is the exclusive and proprietary property of TopCoder, Inc. Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.
+</body>
+</html>

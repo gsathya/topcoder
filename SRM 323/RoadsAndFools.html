@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+
+	<style type="text/css">
+		body { font-family: Helvetica, Arial, Verdana, sans-serif; }
+		.heading { font-weight: bold; font-size: 28px; text-align: center; }
+		.section { padding-top: 10px; }
+		.section .section-title { font-weight: bold; font-size: 20px; color: grey; }
+        .problem-intro { padding-left: 20px; }
+        note, user-constraint { padding-left: 20px; }
+		type {
+			font-weight: bold;
+			font-family: monospace;
+		}
+		img {
+			float: none;
+			display: block;
+			width: 200px;
+			height: auto;
+			margin: 10px;
+			border: 0px solid #ccc;
+		}
+		ul {
+			list-style-type: none;
+			padding: 0px;
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		ul.constraints li:before {
+			content: "-";
+			font-size: 16px;
+			font-family: monospace;
+			position:relative;
+			margin-left: 0px; /* optional, for multiline li element */
+			left: 10px;
+		}
+		ul.notes li:before {
+			content: "~";
+			font-size: 16px;
+			font-family: monospace;
+			font-weight: normal;
+			position:relative;
+			margin-left: 0px; /* optional, for multiline li element */
+			left: 10px;
+		}
+
+		li.testcase {
+			display: flex;
+			line-height: 16px;
+			padding-top: 10px;
+			padding-bottom: 10px;
+		}
+		li.testcase div.testcase-no {
+            min-width: 16px;
+			width: 16px;
+			height: 16px;
+			font-size: 16px;
+			line-height: 16px;
+			padding: 8px;
+			margin-right: 10px;
+			border-radius: 100%;
+			font-weight: bold;
+			text-align: center;
+			vertical-align: top;
+			border: 2px solid #ddd;
+			color: grey;
+		}
+		li.testcase span {
+			vertical-align: middle; 
+			text-align: center;
+			height: 15px;
+			line-height: 16px;
+			min-width: 45px;
+			border-radius: 5px;
+			padding: 0px;
+			padding-left: 5px;
+			padding-right: 5px;
+			margin-right: 10px;
+			display: inline-block;
+		}
+		li.testcase > .testcase-content > div { padding-bottom: 8px; }
+		li.testcase .tag {
+			background: #545454;
+			color: white;
+			font-family: Georgia;
+			font-size: 10px;
+			text-align: center;
+		}
+		li.testcase .testcase-input .tag { visibility: hidden; }
+		li.testcase .testcase-input .tag:first-child { visibility: visible; }
+		li.testcase .data {
+			background: #eee;
+			font-family: monospace;
+		}
+        li.testcase .testcase-comment {
+            margin: 0;
+            padding-left: 5px;
+        }
+        .testcase-comment p:first-child { margin-top: 0; }
+        .testcase-comment p:last-child { margin-bottom: 0; }
+	</style>
+
+    <title>Topcoder - SRM 323 - Problem 500</title>
+</head>
+
+<body>
+	<div class="heading">
+        SRM 323 Div 2 - Problem 500 <br/>
+        RoadsAndFools
+    </div>
+
+	<hr/>
+
+    <!-- Problem Statemnt -->
+    <div class="section">
+        <div class="section-title">Problem Statement</div>
+        <div class="problem-intro">
+            <intro escaped="1">In one big country there is a saying that &quot;we've got only two troubles: roads and fools&quot;. This problem is about both of them.<p></p>
+Two cities of this country are connected by a highway. Some points on the highway are marked with milestones. On the two sides of each milestone the distances to the two cities are written. When you travel from one city to another, the milestones show the distance traveled from the origin city. If the milestones are placed correctly, the numbers you see while traveling must go in ascending order since the distance you've traveled is always increasing.<p></p>
+During the reconstruction of the highway, some of the milestones were stolen, some were broken and some... just disappeared. On top of it all a group of bandits with unexplained motives set out to the highway one night and reversed some of the milestones.<p></p>
+Given the state of the remaining milestones after the act, determine if it is possible to restore the correct orientations.<br></br>
+You are given an <type>int</type> <b>length</b>, the length of the highway, and a <type>int[]</type> <b>frontSides</b>. Each element of <b>frontSides</b> is the mark on the front side of the milestone in the order they are seen traveling from the first city to the second. The mark on the opposite side of milestone i is obviously <b>length</b>-<b>frontSides</b>[i].<p></p>
+Return a <type>String</type> containing the restored sequence of milestones separated by single spaces (again, as seen traveling from the first city to the second). If there is more than one solution, return &quot;MULTIPLE SOLUTIONS&quot;. If no solution exists
+(you can never tell what else could have happend to the milestones in that big country...), return &quot;NO SOLUTION&quot;.<p></p>
+Two solutions are considered equal if you see the same numbers on all milestones when traveling between the cities (see examples 4 and 5 for further clarification).</intro>
+        </div>
+    </div>
+
+    <!-- Notes -->
+    <div class="section">
+        <div class="section-title">Notes</div>
+        <ul class="notes">
+                </ul>
+    </div>
+
+    <!-- Constraints -->
+    <div class="section">
+        <div class="section-title">Constraints</div>
+        <ul class="constraints">
+                    <li><user-constraint escaped="1"><b>length</b> will be between 1 and 1000, inclusive.</user-constraint></li>
+                    <li><user-constraint escaped="1"><b>frontSides</b> will contain between 1 and 50 elements, inclusive.</user-constraint></li>
+                    <li><user-constraint escaped="1">each element of <b>frontSides</b> will be between 0 and <b>length</b>, inclusive.</user-constraint></li>
+                </ul>
+    </div>
+
+    <!-- Test cases -->
+    <div class="section">
+        <div class="section-title">Test cases</div>
+        <ul class="testcases">
+                        <li class="testcase">
+                <div class="testcase-no">0</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>length</b>: 5</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>frontSides</b>: { 1, 2, 3 }</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">"1 2 3"</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment">The first milestone has the numbers 1 and 4 on it. The second and third both have the numbers 2 and 3 on their two sides. &quot;1 2 3&quot; is the only correct orientation.</div>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">1</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>length</b>: 5</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>frontSides</b>: { 5, 2, 0 }</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">"MULTIPLE SOLUTIONS"</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment">There are two correct orientations: {0, 2, 5} and {0, 3, 5}.</div>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">2</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>length</b>: 5</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>frontSides</b>: { 4, 4 }</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">"1 4"</span>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">3</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>length</b>: 5</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>frontSides</b>: { 4, 4, 4 }</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">"NO SOLUTION"</span>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">4</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>length</b>: 5</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>frontSides</b>: { 3 }</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">"MULTIPLE SOLUTIONS"</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment">Both {2} and {3} are correct orientations.</div>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">5</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>length</b>: 10</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>frontSides</b>: { 5 }</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">"5"</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment">Both sides of the milestone contain the number 5, so the solution is unique.</div>
+                    </div>
+                                    </div>
+            </li>
+                    </ul>
+    </div>
+
+    <hr>
+
+    This problem statement is the exclusive and proprietary property of TopCoder, Inc. Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.
+</body>
+</html>
