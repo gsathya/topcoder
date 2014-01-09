@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+
+	<style type="text/css">
+		body { font-family: Helvetica, Arial, Verdana, sans-serif; }
+		.heading { font-weight: bold; font-size: 28px; text-align: center; }
+		.section { padding-top: 10px; }
+		.section .section-title { font-weight: bold; font-size: 20px; color: grey; }
+        .problem-intro { padding-left: 20px; }
+        note, user-constraint { padding-left: 20px; }
+		type {
+			font-weight: bold;
+			font-family: monospace;
+		}
+		img {
+			float: none;
+			display: block;
+			width: 200px;
+			height: auto;
+			margin: 10px;
+			border: 0px solid #ccc;
+		}
+		ul {
+			list-style-type: none;
+			padding: 0px;
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		ul.constraints li:before {
+			content: "-";
+			font-size: 16px;
+			font-family: monospace;
+			position:relative;
+			margin-left: 0px; /* optional, for multiline li element */
+			left: 10px;
+		}
+		ul.notes li:before {
+			content: "~";
+			font-size: 16px;
+			font-family: monospace;
+			font-weight: normal;
+			position:relative;
+			margin-left: 0px; /* optional, for multiline li element */
+			left: 10px;
+		}
+
+		li.testcase {
+			display: flex;
+			line-height: 16px;
+			padding-top: 10px;
+			padding-bottom: 10px;
+		}
+		li.testcase div.testcase-no {
+            min-width: 16px;
+			width: 16px;
+			height: 16px;
+			font-size: 16px;
+			line-height: 16px;
+			padding: 8px;
+			margin-right: 10px;
+			border-radius: 100%;
+			font-weight: bold;
+			text-align: center;
+			vertical-align: top;
+			border: 2px solid #ddd;
+			color: grey;
+		}
+		li.testcase span {
+			vertical-align: middle; 
+			text-align: center;
+			height: 15px;
+			line-height: 16px;
+			min-width: 45px;
+			border-radius: 5px;
+			padding: 0px;
+			padding-left: 5px;
+			padding-right: 5px;
+			margin-right: 10px;
+			display: inline-block;
+		}
+		li.testcase > .testcase-content > div { padding-bottom: 8px; }
+		li.testcase .tag {
+			background: #545454;
+			color: white;
+			font-family: Georgia;
+			font-size: 10px;
+			text-align: center;
+		}
+		li.testcase .testcase-input .tag { visibility: hidden; }
+		li.testcase .testcase-input .tag:first-child { visibility: visible; }
+		li.testcase .data {
+			background: #eee;
+			font-family: monospace;
+		}
+        li.testcase .testcase-comment {
+            margin: 0;
+            padding-left: 5px;
+        }
+        .testcase-comment p:first-child { margin-top: 0; }
+        .testcase-comment p:last-child { margin-bottom: 0; }
+	</style>
+
+    <title>Topcoder - SRM 573 - Problem 500</title>
+</head>
+
+<body>
+	<div class="heading">
+        SRM 573 Div 2 - Problem 500 <br/>
+        TeamContestEasy
+    </div>
+
+	<hr/>
+
+    <!-- Problem Statemnt -->
+    <div class="section">
+        <div class="section-title">Problem Statement</div>
+        <div class="problem-intro">
+            <intro escaped="1">Your university is holding a programming competition and your team is going to compete.
+<br></br><br></br>
+There are 3*N students in the university. They are numbered from 0 to 3*N-1. Each student has a certain <i>strength</i> which is a positive number that characterizes his/her programming skills. You are given a <type>int[]</type> <b>strength</b>. The strength of student i is equal to <b>strength</b>[i].
+<br></br><br></br>
+Your team will consist of students 0, 1 and 2. Other 3*N-3 students will form N-1 more teams so that each team has exactly 3 members. The exact composition of other teams is not known yet. Each team has a strength that is calculated as follows: if it consists of members with strengths X, Y and Z, then the team's strength is equal to X + Y + Z - min{X, Y, Z}, i.e., the strength of a team is the total strength of its two strongest members.
+<br></br><br></br>
+You are interested how your team will rank by strength among the other teams. Formally, the <i>rank</i> of your team is defined as 1 + (the number of other teams that have a strictly greater strength than the strength of your team).
+<br></br><br></br>
+Return the maximum possible rank that your team may have after all students split into teams.
+</intro>
+        </div>
+    </div>
+
+    <!-- Notes -->
+    <div class="section">
+        <div class="section-title">Notes</div>
+        <ul class="notes">
+                </ul>
+    </div>
+
+    <!-- Constraints -->
+    <div class="section">
+        <div class="section-title">Constraints</div>
+        <ul class="constraints">
+                    <li><user-constraint escaped="1"><b>strength</b> will contain between 3 and 48 elements, inclusive.</user-constraint></li>
+                    <li><user-constraint escaped="1">The number of elements in <b>strength</b> will be divisible by 3.</user-constraint></li>
+                    <li><user-constraint escaped="1">Each element of <b>strength</b> will be between 1 and 1,000,000, inclusive.</user-constraint></li>
+                </ul>
+    </div>
+
+    <!-- Test cases -->
+    <div class="section">
+        <div class="section-title">Test cases</div>
+        <ul class="testcases">
+                        <li class="testcase">
+                <div class="testcase-no">0</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>strength</b>: { 5, 7, 3, 5, 7, 3, 5, 7, 3 }</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">2</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment">The strength of your team is 5 + 7 + 3 - min{5, 7, 3} = 12. It is possible that one of the other teams will be stronger than your team. For example, if it consists of students with strengths 5, 7 and 7, then its strength will be 14. However, it is not possible that both other teams will be stronger than your team.</div>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">1</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>strength</b>: { 5, 7, 3 }</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">1</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment">Just your team. No rivals.</div>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">2</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>strength</b>: { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">1</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment">All teams (including yours) will have the same strength: 2.</div>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">3</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>strength</b>: { 2, 2, 1, 1, 3, 1, 3, 2, 1, 3, 1, 2, 1, 2, 1 }</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">4</span>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">4</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>strength</b>: { 45, 72, 10, 42, 67, 51, 33, 21, 8, 51, 17, 72 }</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">3</span>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">5</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>strength</b>: { 570466, 958327, 816467, 17, 403, 953808, 734850, 5824, 917784, 921731, 161921, 1734, 823437, 3218, 81, 932681, 2704, 981643, 1232, 475, 873323, 6558, 45660, 1813, 4714, 224, 32301, 28081, 6728, 17055, 561, 15146, 842613, 5559, 1860, 783, 989, 2811, 20664, 112531, 1933, 866794, 805528, 53821, 2465, 137385, 39, 2007 }</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">6</span>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">6</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>strength</b>: { 610297, 849870, 523999, 6557, 976530, 731458, 7404, 795100, 147040, 110947, 159692, 40785, 4949, 2903, 1688, 37278, 620703, 28156, 16823, 1159, 12132, 971379, 5916, 1159, 988589, 12215, 133, 1490, 911360, 920059, 544070, 40249, 514852, 852, 745070, 1105, 715897, 714696, 589133, 698317, 5683, 631612, 16453, 101000, 764881, 101, 2053, 754661 }</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">10</span>
+                    </div>
+                                    </div>
+            </li>
+                    </ul>
+    </div>
+
+    <hr>
+
+    This problem statement is the exclusive and proprietary property of TopCoder, Inc. Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.
+</body>
+</html>

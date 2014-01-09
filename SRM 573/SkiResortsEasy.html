@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+
+	<style type="text/css">
+		body { font-family: Helvetica, Arial, Verdana, sans-serif; }
+		.heading { font-weight: bold; font-size: 28px; text-align: center; }
+		.section { padding-top: 10px; }
+		.section .section-title { font-weight: bold; font-size: 20px; color: grey; }
+        .problem-intro { padding-left: 20px; }
+        note, user-constraint { padding-left: 20px; }
+		type {
+			font-weight: bold;
+			font-family: monospace;
+		}
+		img {
+			float: none;
+			display: block;
+			width: 200px;
+			height: auto;
+			margin: 10px;
+			border: 0px solid #ccc;
+		}
+		ul {
+			list-style-type: none;
+			padding: 0px;
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		ul.constraints li:before {
+			content: "-";
+			font-size: 16px;
+			font-family: monospace;
+			position:relative;
+			margin-left: 0px; /* optional, for multiline li element */
+			left: 10px;
+		}
+		ul.notes li:before {
+			content: "~";
+			font-size: 16px;
+			font-family: monospace;
+			font-weight: normal;
+			position:relative;
+			margin-left: 0px; /* optional, for multiline li element */
+			left: 10px;
+		}
+
+		li.testcase {
+			display: flex;
+			line-height: 16px;
+			padding-top: 10px;
+			padding-bottom: 10px;
+		}
+		li.testcase div.testcase-no {
+            min-width: 16px;
+			width: 16px;
+			height: 16px;
+			font-size: 16px;
+			line-height: 16px;
+			padding: 8px;
+			margin-right: 10px;
+			border-radius: 100%;
+			font-weight: bold;
+			text-align: center;
+			vertical-align: top;
+			border: 2px solid #ddd;
+			color: grey;
+		}
+		li.testcase span {
+			vertical-align: middle; 
+			text-align: center;
+			height: 15px;
+			line-height: 16px;
+			min-width: 45px;
+			border-radius: 5px;
+			padding: 0px;
+			padding-left: 5px;
+			padding-right: 5px;
+			margin-right: 10px;
+			display: inline-block;
+		}
+		li.testcase > .testcase-content > div { padding-bottom: 8px; }
+		li.testcase .tag {
+			background: #545454;
+			color: white;
+			font-family: Georgia;
+			font-size: 10px;
+			text-align: center;
+		}
+		li.testcase .testcase-input .tag { visibility: hidden; }
+		li.testcase .testcase-input .tag:first-child { visibility: visible; }
+		li.testcase .data {
+			background: #eee;
+			font-family: monospace;
+		}
+        li.testcase .testcase-comment {
+            margin: 0;
+            padding-left: 5px;
+        }
+        .testcase-comment p:first-child { margin-top: 0; }
+        .testcase-comment p:last-child { margin-bottom: 0; }
+	</style>
+
+    <title>Topcoder - SRM 573 - Problem 250</title>
+</head>
+
+<body>
+	<div class="heading">
+        SRM 573 Div 2 - Problem 250 <br/>
+        SkiResortsEasy
+    </div>
+
+	<hr/>
+
+    <!-- Problem Statemnt -->
+    <div class="section">
+        <div class="section-title">Problem Statement</div>
+        <div class="problem-intro">
+            <intro escaped="1">Fox Ciel is the owner of a ski resort. The ski resort has N places numbered 0 through N-1. You are given a <type>int[]</type> <b>altitude</b>. For each i, the i-th element of <b>altitude</b> is the altitude of the place i.
+<br></br>
+<br></br>
+The skiers would like to follow the path (place 0) -&amp;gt; (place 1) -&amp;gt; ... -&amp;gt; (place N-1). The trip will only be possible if the altitudes of the places are non-increasing. In order to make the trip possible, Ciel now needs to decrease the altitudes of some places. In other words, Ciel wants to decrease some of the altitudes so that <b>altitude</b>[0] &amp;gt;= <b>altitude</b>[1] &amp;gt;= ... &amp;gt;= <b>altitude</b>[N-1] holds. It costs 1 unit of money to decrease the altitude of one place by 1 unit of height.
+<br></br>
+<br></br>
+Return the minimal cost required for the change.</intro>
+        </div>
+    </div>
+
+    <!-- Notes -->
+    <div class="section">
+        <div class="section-title">Notes</div>
+        <ul class="notes">
+                </ul>
+    </div>
+
+    <!-- Constraints -->
+    <div class="section">
+        <div class="section-title">Constraints</div>
+        <ul class="constraints">
+                    <li><user-constraint escaped="1"><b>altitude</b> will contain between 2 and 50 elements, inclusive.</user-constraint></li>
+                    <li><user-constraint escaped="1">Each element of <b>altitude</b> will be between 0 and 1,000, inclusive.</user-constraint></li>
+                </ul>
+    </div>
+
+    <!-- Test cases -->
+    <div class="section">
+        <div class="section-title">Test cases</div>
+        <ul class="testcases">
+                        <li class="testcase">
+                <div class="testcase-no">0</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>altitude</b>: { 30, 20, 20, 10 }</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">0</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment">The altitudes are already non-increasing, so Ciel doesn't need to change anything.</div>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">1</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>altitude</b>: { 5, 7, 3 }</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">2</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment">Ciel should change the altitude of place 1 (0-based index) from 7 to 5.
+This changes the sequence of altitudes to {5, 5, 3}.
+The cost of the change is 7 - 5 = 2 units of money.</div>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">2</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>altitude</b>: { 6, 8, 5, 4, 7, 4, 2, 3, 1 }</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">6</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment">Ciel should change the altitudes to {6, 6, 5, 4, 4, 4, 2, 2, 1}.</div>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">3</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>altitude</b>: { 749, 560, 921, 166, 757, 818, 228, 584, 366, 88 }</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">2284</span>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">4</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>altitude</b>: { 712, 745, 230, 200, 648, 440, 115, 913, 627, 621, 186, 222, 741, 954, 581, 193, 266, 320, 798, 745 }</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">6393</span>
+                    </div>
+                                    </div>
+            </li>
+                    </ul>
+    </div>
+
+    <hr>
+
+    This problem statement is the exclusive and proprietary property of TopCoder, Inc. Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.
+</body>
+</html>
