@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+
+	<style type="text/css">
+		body { font-family: Helvetica, Arial, Verdana, sans-serif; }
+		.heading { font-weight: bold; font-size: 28px; text-align: center; }
+		.section { padding-top: 10px; }
+		.section .section-title { font-weight: bold; font-size: 20px; color: grey; }
+        .problem-intro { padding-left: 20px; }
+        note, user-constraint { padding-left: 20px; }
+		type {
+			font-weight: bold;
+			font-family: monospace;
+		}
+		img {
+			float: none;
+			display: block;
+			width: 200px;
+			height: auto;
+			margin: 10px;
+			border: 0px solid #ccc;
+		}
+		ul {
+			list-style-type: none;
+			padding: 0px;
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		ul.constraints li:before {
+			content: "-";
+			font-size: 16px;
+			font-family: monospace;
+			position:relative;
+			margin-left: 0px; /* optional, for multiline li element */
+			left: 10px;
+		}
+		ul.notes li:before {
+			content: "~";
+			font-size: 16px;
+			font-family: monospace;
+			font-weight: normal;
+			position:relative;
+			margin-left: 0px; /* optional, for multiline li element */
+			left: 10px;
+		}
+
+		li.testcase {
+			display: flex;
+			line-height: 16px;
+			padding-top: 10px;
+			padding-bottom: 10px;
+		}
+		li.testcase div.testcase-no {
+            min-width: 16px;
+			width: 16px;
+			height: 16px;
+			font-size: 16px;
+			line-height: 16px;
+			padding: 8px;
+			margin-right: 10px;
+			border-radius: 100%;
+			font-weight: bold;
+			text-align: center;
+			vertical-align: top;
+			border: 2px solid #ddd;
+			color: grey;
+		}
+		li.testcase span {
+			vertical-align: middle; 
+			text-align: center;
+			height: 15px;
+			line-height: 16px;
+			min-width: 45px;
+			border-radius: 5px;
+			padding: 0px;
+			padding-left: 5px;
+			padding-right: 5px;
+			margin-right: 10px;
+			display: inline-block;
+		}
+		li.testcase > .testcase-content > div { padding-bottom: 8px; }
+		li.testcase .tag {
+			background: #545454;
+			color: white;
+			font-family: Georgia;
+			font-size: 10px;
+			text-align: center;
+		}
+		li.testcase .testcase-input .tag { visibility: hidden; }
+		li.testcase .testcase-input .tag:first-child { visibility: visible; }
+		li.testcase .data {
+			background: #eee;
+			font-family: monospace;
+		}
+        li.testcase .testcase-comment {
+            margin: 0;
+            padding-left: 5px;
+        }
+        .testcase-comment p:first-child { margin-top: 0; }
+        .testcase-comment p:last-child { margin-bottom: 0; }
+	</style>
+
+    <title>Topcoder - Single Round Match 606 - Problem 250</title>
+</head>
+
+<body>
+	<div class="heading">
+        Single Round Match 606 Div  - Problem 250 <br/>
+        EllysSubstringSorter
+    </div>
+
+	<hr/>
+
+    <!-- Problem Statemnt -->
+    <div class="section">
+        <div class="section-title">Problem Statement</div>
+        <div class="problem-intro">
+            <intro escaped="1">Elly has a <type>String</type> <b>S</b> of uppercase letters and a magic device that can modify the string. The strength of the device is an <type>int</type> <b>L</b>.<br></br><br></br>
+
+The device does the following: The user enters a 0-based index i such that 0 &amp;lt;= i &amp;lt;= length(<b>S</b>)-<b>L</b>. The device then takes <b>L</b> letters of <b>S</b>, starting at index i, and puts these letters into alphabetical order.<br></br>
+Formally, the letters that get reordered are the letters <b>S</b>[i], <b>S</b>[i+1], and so on, until and including <b>S</b>[i+<b>L</b>-1].<br></br><br></br>
+
+For example, let <b>S</b>=&quot;TOPCODER&quot; and let <b>L</b>=4. If the user chooses i=0, the selected substring will be &quot;TOPC&quot;. These letters are rearranged into alphabetical order (&quot;COPT&quot;) while the rest of the string remains unchanged (&quot;....ODER&quot;). Thus, the result would be the string &quot;COPTODER&quot;. If the user were to choose i=2 instead, the resulting string would be &quot;TOCDOPER&quot;. Here, &quot;TO....ER&quot; was left unchanged, and &quot;PCOD&quot; was changed into &quot;CDOP&quot;.<br></br><br></br>
+
+Elly's magic device has a flaw: it can only be used once and then it self-destructs. You are given the <type>String</type> <b>S</b> and the <type>int</type> <b>L</b> described above. Return the lexicographically smallest string Elly can create by using the device exactly once.
+</intro>
+        </div>
+    </div>
+
+    <!-- Notes -->
+    <div class="section">
+        <div class="section-title">Notes</div>
+        <ul class="notes">
+                    <li><note escaped="1">A string S<sub>1</sub> is lexicographically smaller than a string S<sub>2</sub> if S<sub>1</sub> contains a smaller character than S<sub>2</sub> at the first index where they differ.</note></li>
+                </ul>
+    </div>
+
+    <!-- Constraints -->
+    <div class="section">
+        <div class="section-title">Constraints</div>
+        <ul class="constraints">
+                    <li><user-constraint escaped="1"><b>L</b> will be between 2 and 50, inclusive.</user-constraint></li>
+                    <li><user-constraint escaped="1"><b>S</b> will contain between <b>L</b> and 50 characters, inclusive.</user-constraint></li>
+                    <li><user-constraint escaped="1">Each character of <b>S</b> will be an uppercase letter of the English alphabet ('A'-'Z').</user-constraint></li>
+                </ul>
+    </div>
+
+    <!-- Test cases -->
+    <div class="section">
+        <div class="section-title">Test cases</div>
+        <ul class="testcases">
+                        <li class="testcase">
+                <div class="testcase-no">0</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>S</b>: "TOPCODER"</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>L</b>: 4</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">"COPTODER"</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment">The best we can do here is to sort the first 4 characters of the string.</div>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">1</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>S</b>: "ESPRIT"</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>L</b>: 3</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">"EPRSIT"</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment">The best solution is obtained by choosing i=1, i.e., by sorting the letters in the substring &quot;SPR&quot;.</div>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">2</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>S</b>: "AAAAAAAAA"</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>L</b>: 2</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">"AAAAAAAAA"</span>
+                    </div>
+                                        <div style="display: flex;">
+                        <span class="tag">comment</span>
+                        <div class="testcase-comment">Sometimes sorting doesn't do anything.</div>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">3</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>S</b>: "ABRACADABRA"</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>L</b>: 5</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">"AAABCRDABRA"</span>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">4</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>S</b>: "BAZINGA"</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>L</b>: 6</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">"ABGINZA"</span>
+                    </div>
+                                    </div>
+            </li>
+                        <li class="testcase">
+                <div class="testcase-no">5</div>
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                    
+                                            <span class="tag">input</span>
+                        <span class="data"><b>S</b>: "AAAWDIUAOIWDESBEAIWODJAWDBPOAWDUISAWDOOPAWD"</span>
+                        <br/>
+                                            <span class="tag">input</span>
+                        <span class="data"><b>L</b>: 21</span>
+                        <br/>
+                                        </div>
+                    <div>
+                        <span class="tag">output</span>
+                        <span class="data">"AAAAAABDDDEEIIIJOOSUWWWWDBPOAWDUISAWDOOPAWD"</span>
+                    </div>
+                                    </div>
+            </li>
+                    </ul>
+    </div>
+
+    <hr>
+
+    This problem statement is the exclusive and proprietary property of TopCoder, Inc. Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.
+</body>
+</html>
