@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>TopCoder SRM 308 - 450: HuffmanDecoding</title>
+    <title>TopCoder SRM 220 - 250: LeapAge</title>
     
     <link type="image/x-icon" rel="shortcut icon" href="http://www.topcoder.com/i/favicon.ico"/>
     
@@ -213,10 +213,10 @@ li.testcase .data {
 
 <body>
     <h1 class="heading">
-        <span id='contest-name'>SRM 308</span>
+        <span id='contest-name'>SRM 220</span>
         <span id='contest-division'>2</span>
-        <span id='problem-score'>450</span>
-        <span id='problem-name'>HuffmanDecoding</span>
+        <span id='problem-score'>250</span>
+        <span id='problem-name'>LeapAge</span>
     </h1>
 
     <hr />
@@ -225,8 +225,11 @@ li.testcase .data {
     <div class="section">
         <h2 class="section-title">Problem Statement</h2>
         <div class="problem-intro">
-            <intro><p>When text is encoded using Huffman codes, each symbol is replaced by a string of 0s and 1s called a bit string representation.  The replacement is done in such a way that the bit string representation of a symbol is never the prefix of the bit string representation of any other symbol.  This property allows us to unambiguously decode the encoded text.</p>
-<p>You will be given a <type>String</type> <b>archive</b> and a <type>String[]</type> <b>dictionary</b>. The i-th element of <b>dictionary</b> will be the bit string representation of the i-th uppercase letter. Decode <b>archive</b> using <b>dictionary</b> and return the result as a single <type>String</type>.</p></intro>
+            <intro><p>Your friend was born on &quot;leap day&quot; and has always been troubled by the fact that he just turned 24 this year on his 5th birthday.  You would like to write him a nice program for his birthday to help him and other leap-day-born people keep track of how many birthdays they've had so far.</p>
+
+<p>You will be given two years as <type>int</type>s, <b>year</b> represents the current year and <b>born</b> represents the year the person was born.  You are to return the number of leap days that have occurred in that time span, not including the first year if it is a leap year, but including the current year if it's a leap year.</p>
+
+<p>A leap year is any year that is a multiple of 4, unless it is divisible by 100 and not 400.  For example, 1984 was a leap year, but 1900 wasn't, because it was divisible by 100 and not 400.  2000 was a leap year, because it was divisible by both 100 <i>and</i> 400.</p></intro>
         </div>
     </div>
     
@@ -238,32 +241,32 @@ li.testcase .data {
             <ul class="problem-definition-lines">
                 <li class="definition-line" id='class-line'>
                     <span class='definition-name'>Class</span>
-                    <span class='definition-value'>HuffmanDecoding</span>
+                    <span class='definition-value'>LeapAge</span>
                 </li>
                 <li class="definition-line" id='method-line'>
                     <span class='definition-name'>Method</span>
-                    <span class='definition-value'>decode</span>
+                    <span class='definition-value'>getAge</span>
                 </li>
                 <li class="definition-line" id='parameters-line'>
                     <span class='definition-name'>Parameters</span>
                     <span class='definition-value'>
                     
-                        string
+                        integer
                     , 
-                        tuple(string)
+                        integer
                     
                     </span>
                 </li>
                 <li class="definition-line" id='returns-line'>
                     <span class='definition-name'>Returns</span>
                     <span class='definition-value'>
-                        string
+                        integer
                     </span>
                 </li>
                 <li class="definition-line" id='signature-line'>
                     <span class='definition-name'>Method signature</span>
                     <span class='definition-value'>
-                        def decode(self, archive, dictionary)
+                        def getAge(self, year, born)
                     </span>
                 </li>
             </ul>
@@ -290,25 +293,25 @@ li.testcase .data {
     </div>
 
     
+    <!-- Notes -->
+    <div class="section">
+        <h2 class="section-title">Notes</h2>
+        <ul class="notes">
+        
+            <li><note>It is possible that <b>year</b> and <b>born</b> are not actually leap years.</note></li>
+        
+        </ul>
+    </div>
+    
     
     <!-- Constraints -->
     <div class="section">
         <h2 class="section-title">Constraints</h2>
         <ul class="constraints">
         
-            <li><user-constraint><b>archive</b> will contain between 1 and 50 characters, inclusive. </user-constraint></li>
+            <li><user-constraint><b>year</b> and <b>born</b> will both be between 1582 and 10000 (1582 is when the Gregorian Calendar started, so there were no leap years before then).</user-constraint></li>
         
-            <li><user-constraint><b>archive</b> will contain only the characters '0' (zero) and '1' (one).</user-constraint></li>
-        
-            <li><user-constraint><b>dictionary</b> will contain between 1 and 26 elements, inclusive. </user-constraint></li>
-        
-            <li><user-constraint>Each element of <b>dictionary</b> will contain between 1 and 50 characters, inclusive. </user-constraint></li>
-        
-            <li><user-constraint>Each element of <b>dictionary</b> will contain only the characters '0' (zero) and '1' (one).</user-constraint></li>
-        
-            <li><user-constraint>No element of <b>dictionary</b> will be a prefix of any other element of <b>dictionary</b>.</user-constraint></li>
-        
-            <li><user-constraint><b>archive</b> will be decodable using <b>dictionary</b></user-constraint></li>
+            <li><user-constraint><b>year</b> will be greater than <b>born</b>.</user-constraint></li>
         
         </ul>
     </div>
@@ -325,19 +328,19 @@ li.testcase .data {
                         <ul class="variables">
                         
                             <li class="variable data">
-                                <span class="name data">archive</span>
+                                <span class="name data">year</span>
                                 <span class="value data">
                                 
-                                    &quot;101101&quot;
+                                    2004
                                 
                                 </span>
                             </li>
                         
                             <li class="variable data">
-                                <span class="name data">dictionary</span>
+                                <span class="name data">born</span>
                                 <span class="value data">
                                 
-                                    {&quot;00&quot;,<br />&nbsp;&quot;10&quot;,<br />&nbsp;&quot;01&quot;,<br />&nbsp;&quot;11&quot;}
+                                    1980
                                 
                                 </span>
                             </li>
@@ -349,14 +352,14 @@ li.testcase .data {
                         <span class="prefix data">Returns</span>
                         <span class="value data">
                         
-                            &quot;BDC&quot;
+                            6
                         
                         </span>
                     </div>
                     
                     <div class="testcase-annotation">
                         <div class='tag'>note</div>
-                        <div class="testcase-comment">Because there are no elements in dictionary that are prefixes of other elements, only one element of dictionary will be a prefix of <b>archive</b>.  In this case, it is the second element (&quot;10&quot;) which represents 'B'.  The rest of the text can be decoded using the same logic.</div>
+                        <div class="testcase-comment">This is the case in the first paragraph of the problem statement.</div>
                     </div>
                     
                
@@ -370,19 +373,19 @@ li.testcase .data {
                         <ul class="variables">
                         
                             <li class="variable data">
-                                <span class="name data">archive</span>
+                                <span class="name data">year</span>
                                 <span class="value data">
                                 
-                                    &quot;10111010&quot;
+                                    10000
                                 
                                 </span>
                             </li>
                         
                             <li class="variable data">
-                                <span class="name data">dictionary</span>
+                                <span class="name data">born</span>
                                 <span class="value data">
                                 
-                                    { &quot;0&quot;, &quot;111&quot;, &quot;10&quot; }
+                                    1582
                                 
                                 </span>
                             </li>
@@ -394,14 +397,14 @@ li.testcase .data {
                         <span class="prefix data">Returns</span>
                         <span class="value data">
                         
-                            &quot;CBAC&quot;
+                            2042
                         
                         </span>
                     </div>
                     
                     <div class="testcase-annotation">
                         <div class='tag'>note</div>
-                        <div class="testcase-comment">Note that elements of <b>dictionary</b> can be of different lengths.</div>
+                        <div class="testcase-comment">This is about as old as you get in this problem.  Note that while the Gregorian Calendar (and therefore, leap years) started in 1582, 1582 wasn't a leap year.</div>
                     </div>
                     
                
@@ -415,19 +418,19 @@ li.testcase .data {
                         <ul class="variables">
                         
                             <li class="variable data">
-                                <span class="name data">archive</span>
+                                <span class="name data">year</span>
                                 <span class="value data">
                                 
-                                    &quot;0001001100100111001&quot;
+                                    2007
                                 
                                 </span>
                             </li>
                         
                             <li class="variable data">
-                                <span class="name data">dictionary</span>
+                                <span class="name data">born</span>
                                 <span class="value data">
                                 
-                                    {&quot;1&quot;,<br />&nbsp;&quot;0&quot;}
+                                    1981
                                 
                                 </span>
                             </li>
@@ -439,14 +442,14 @@ li.testcase .data {
                         <span class="prefix data">Returns</span>
                         <span class="value data">
                         
-                            &quot;BBBABBAABBABBAAABBA&quot;
+                            6
                         
                         </span>
                     </div>
                     
                     <div class="testcase-annotation">
                         <div class='tag'>note</div>
-                        <div class="testcase-comment">'1' is replaced by 'A', '0' is replaced by 'B'.</div>
+                        <div class="testcase-comment">You really don't know why your lying friend asked you to write this...</div>
                     </div>
                     
                
@@ -460,19 +463,19 @@ li.testcase .data {
                         <ul class="variables">
                         
                             <li class="variable data">
-                                <span class="name data">archive</span>
+                                <span class="name data">year</span>
                                 <span class="value data">
                                 
-                                    &quot;111011011000100110&quot;
+                                    1981
                                 
                                 </span>
                             </li>
                         
                             <li class="variable data">
-                                <span class="name data">dictionary</span>
+                                <span class="name data">born</span>
                                 <span class="value data">
                                 
-                                    { &quot;010&quot;, &quot;00&quot;, &quot;0110&quot;, &quot;0111&quot;, &quot;11&quot;, &quot;100&quot;, &quot;101&quot; }
+                                    1980
                                 
                                 </span>
                             </li>
@@ -484,7 +487,7 @@ li.testcase .data {
                         <span class="prefix data">Returns</span>
                         <span class="value data">
                         
-                            &quot;EGGFAC&quot;
+                            0
                         
                         </span>
                     </div>
@@ -500,19 +503,19 @@ li.testcase .data {
                         <ul class="variables">
                         
                             <li class="variable data">
-                                <span class="name data">archive</span>
+                                <span class="name data">year</span>
                                 <span class="value data">
                                 
-                                    &quot;001101100101100110111101011001011001010&quot;
+                                    1984
                                 
                                 </span>
                             </li>
                         
                             <li class="variable data">
-                                <span class="name data">dictionary</span>
+                                <span class="name data">born</span>
                                 <span class="value data">
                                 
-                                    { &quot;110&quot;, &quot;011&quot;, &quot;10&quot;, &quot;0011&quot;, &quot;00011&quot;, &quot;111&quot;, &quot;00010&quot;, &quot;0010&quot;, &quot;010&quot;, &quot;0000&quot; }
+                                    1983
                                 
                                 </span>
                             </li>
@@ -524,7 +527,47 @@ li.testcase .data {
                         <span class="prefix data">Returns</span>
                         <span class="value data">
                         
-                            &quot;DBHABBACAIAIC&quot;
+                            1
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">year</span>
+                                <span class="value data">
+                                
+                                    9700
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">born</span>
+                                <span class="value data">
+                                
+                                    5795
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            947
                         
                         </span>
                     </div>

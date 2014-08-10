@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>TopCoder SRM 308 - 450: HuffmanDecoding</title>
+    <title>TopCoder SRM 628 - 250: BishopMove</title>
     
     <link type="image/x-icon" rel="shortcut icon" href="http://www.topcoder.com/i/favicon.ico"/>
     
@@ -213,10 +213,10 @@ li.testcase .data {
 
 <body>
     <h1 class="heading">
-        <span id='contest-name'>SRM 308</span>
+        <span id='contest-name'>SRM 628</span>
         <span id='contest-division'>2</span>
-        <span id='problem-score'>450</span>
-        <span id='problem-name'>HuffmanDecoding</span>
+        <span id='problem-score'>250</span>
+        <span id='problem-name'>BishopMove</span>
     </h1>
 
     <hr />
@@ -225,8 +225,29 @@ li.testcase .data {
     <div class="section">
         <h2 class="section-title">Problem Statement</h2>
         <div class="problem-intro">
-            <intro><p>When text is encoded using Huffman codes, each symbol is replaced by a string of 0s and 1s called a bit string representation.  The replacement is done in such a way that the bit string representation of a symbol is never the prefix of the bit string representation of any other symbol.  This property allows us to unambiguously decode the encoded text.</p>
-<p>You will be given a <type>String</type> <b>archive</b> and a <type>String[]</type> <b>dictionary</b>. The i-th element of <b>dictionary</b> will be the bit string representation of the i-th uppercase letter. Decode <b>archive</b> using <b>dictionary</b> and return the result as a single <type>String</type>.</p></intro>
+            <intro escaped="1"><p>Janusz is learning how to play chess.
+He is using the standard chessboard with 8 rows and 8 columns.
+Both the rows and the columns are numbered 0 through 7.
+Thus, we can describe each cell using its two coordinates: (row, column).</p>
+
+<p>Janusz recently learned about one of the chess pieces: the bishop.
+The bishop is a piece that moves diagonally by an arbitrary number of cells.
+Formally, if a bishop is currently on the cell (r,c) of an empty chessboard,
+the set of all cells reachable in a single move contains the following cells:
+<ul>
+<li>All cells of the form (r+k,c+k), where k is a positive integer.</li>
+<li>All cells of the form (r+k,c-k), where k is a positive integer.</li>
+<li>All cells of the form (r-k,c+k), where k is a positive integer.</li>
+<li>All cells of the form (r-k,c-k), where k is a positive integer.</li>
+</ul>
+(Of course, the bishop's destination must always be a valid cell on the chessboard.)</p>
+
+<p>Janusz took an empty chessboard and he placed a single bishop onto the cell (<b>r1</b>,<b>c1</b>).
+He now wants to move it to the cell (<b>r2</b>,<b>c2</b>) using as few moves as possible.</p>
+
+<p>You are given the <type>int</type>s <b>r1</b>, <b>c1</b>, <b>r2</b>, and <b>c2</b>.
+Compute and return the smallest number of moves a bishop needs to get from (<b>r1</b>,<b>c1</b>) to (<b>r2</b>,<b>c2</b>).
+If it is impossible for a bishop to reach the target cell, return -1 instead.</p></intro>
         </div>
     </div>
     
@@ -238,32 +259,36 @@ li.testcase .data {
             <ul class="problem-definition-lines">
                 <li class="definition-line" id='class-line'>
                     <span class='definition-name'>Class</span>
-                    <span class='definition-value'>HuffmanDecoding</span>
+                    <span class='definition-value'>BishopMove</span>
                 </li>
                 <li class="definition-line" id='method-line'>
                     <span class='definition-name'>Method</span>
-                    <span class='definition-value'>decode</span>
+                    <span class='definition-value'>howManyMoves</span>
                 </li>
                 <li class="definition-line" id='parameters-line'>
                     <span class='definition-name'>Parameters</span>
                     <span class='definition-value'>
                     
-                        string
+                        integer
                     , 
-                        tuple(string)
+                        integer
+                    , 
+                        integer
+                    , 
+                        integer
                     
                     </span>
                 </li>
                 <li class="definition-line" id='returns-line'>
                     <span class='definition-name'>Returns</span>
                     <span class='definition-value'>
-                        string
+                        integer
                     </span>
                 </li>
                 <li class="definition-line" id='signature-line'>
                     <span class='definition-name'>Method signature</span>
                     <span class='definition-value'>
-                        def decode(self, archive, dictionary)
+                        def howManyMoves(self, r1, c1, r2, c2)
                     </span>
                 </li>
             </ul>
@@ -283,7 +308,7 @@ li.testcase .data {
                 </li>
                 <li class='limit-line'>
                     <span class='limit-name'>Memory limit (MB)</span>
-                    <span class='limit-value'>64</span>
+                    <span class='limit-value'>256</span>
                 </li>
             </ul>
         </div>
@@ -296,19 +321,7 @@ li.testcase .data {
         <h2 class="section-title">Constraints</h2>
         <ul class="constraints">
         
-            <li><user-constraint><b>archive</b> will contain between 1 and 50 characters, inclusive. </user-constraint></li>
-        
-            <li><user-constraint><b>archive</b> will contain only the characters '0' (zero) and '1' (one).</user-constraint></li>
-        
-            <li><user-constraint><b>dictionary</b> will contain between 1 and 26 elements, inclusive. </user-constraint></li>
-        
-            <li><user-constraint>Each element of <b>dictionary</b> will contain between 1 and 50 characters, inclusive. </user-constraint></li>
-        
-            <li><user-constraint>Each element of <b>dictionary</b> will contain only the characters '0' (zero) and '1' (one).</user-constraint></li>
-        
-            <li><user-constraint>No element of <b>dictionary</b> will be a prefix of any other element of <b>dictionary</b>.</user-constraint></li>
-        
-            <li><user-constraint><b>archive</b> will be decodable using <b>dictionary</b></user-constraint></li>
+            <li><user-constraint escaped="1"><b>r1,c1,r2,c2</b> will be between 0 and 7, inclusive.</user-constraint></li>
         
         </ul>
     </div>
@@ -325,19 +338,37 @@ li.testcase .data {
                         <ul class="variables">
                         
                             <li class="variable data">
-                                <span class="name data">archive</span>
+                                <span class="name data">r1</span>
                                 <span class="value data">
                                 
-                                    &quot;101101&quot;
+                                    4
                                 
                                 </span>
                             </li>
                         
                             <li class="variable data">
-                                <span class="name data">dictionary</span>
+                                <span class="name data">c1</span>
                                 <span class="value data">
                                 
-                                    {&quot;00&quot;,<br />&nbsp;&quot;10&quot;,<br />&nbsp;&quot;01&quot;,<br />&nbsp;&quot;11&quot;}
+                                    6
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">r2</span>
+                                <span class="value data">
+                                
+                                    7
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">c2</span>
+                                <span class="value data">
+                                
+                                    3
                                 
                                 </span>
                             </li>
@@ -349,14 +380,14 @@ li.testcase .data {
                         <span class="prefix data">Returns</span>
                         <span class="value data">
                         
-                            &quot;BDC&quot;
+                            1
                         
                         </span>
                     </div>
                     
                     <div class="testcase-annotation">
                         <div class='tag'>note</div>
-                        <div class="testcase-comment">Because there are no elements in dictionary that are prefixes of other elements, only one element of dictionary will be a prefix of <b>archive</b>.  In this case, it is the second element (&quot;10&quot;) which represents 'B'.  The rest of the text can be decoded using the same logic.</div>
+                        <div class="testcase-comment">The bishop can go from (4,6) to (7,3) in a single move.</div>
                     </div>
                     
                
@@ -370,19 +401,37 @@ li.testcase .data {
                         <ul class="variables">
                         
                             <li class="variable data">
-                                <span class="name data">archive</span>
+                                <span class="name data">r1</span>
                                 <span class="value data">
                                 
-                                    &quot;10111010&quot;
+                                    2
                                 
                                 </span>
                             </li>
                         
                             <li class="variable data">
-                                <span class="name data">dictionary</span>
+                                <span class="name data">c1</span>
                                 <span class="value data">
                                 
-                                    { &quot;0&quot;, &quot;111&quot;, &quot;10&quot; }
+                                    5
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">r2</span>
+                                <span class="value data">
+                                
+                                    2
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">c2</span>
+                                <span class="value data">
+                                
+                                    5
                                 
                                 </span>
                             </li>
@@ -394,14 +443,14 @@ li.testcase .data {
                         <span class="prefix data">Returns</span>
                         <span class="value data">
                         
-                            &quot;CBAC&quot;
+                            0
                         
                         </span>
                     </div>
                     
                     <div class="testcase-annotation">
                         <div class='tag'>note</div>
-                        <div class="testcase-comment">Note that elements of <b>dictionary</b> can be of different lengths.</div>
+                        <div class="testcase-comment">The bishop is already where it should be, no moves are necessary.</div>
                     </div>
                     
                
@@ -415,19 +464,37 @@ li.testcase .data {
                         <ul class="variables">
                         
                             <li class="variable data">
-                                <span class="name data">archive</span>
+                                <span class="name data">r1</span>
                                 <span class="value data">
                                 
-                                    &quot;0001001100100111001&quot;
+                                    1
                                 
                                 </span>
                             </li>
                         
                             <li class="variable data">
-                                <span class="name data">dictionary</span>
+                                <span class="name data">c1</span>
                                 <span class="value data">
                                 
-                                    {&quot;1&quot;,<br />&nbsp;&quot;0&quot;}
+                                    3
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">r2</span>
+                                <span class="value data">
+                                
+                                    5
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">c2</span>
+                                <span class="value data">
+                                
+                                    5
                                 
                                 </span>
                             </li>
@@ -439,14 +506,15 @@ li.testcase .data {
                         <span class="prefix data">Returns</span>
                         <span class="value data">
                         
-                            &quot;BBBABBAABBABBAAABBA&quot;
+                            2
                         
                         </span>
                     </div>
                     
                     <div class="testcase-annotation">
                         <div class='tag'>note</div>
-                        <div class="testcase-comment">'1' is replaced by 'A', '0' is replaced by 'B'.</div>
+                        <div class="testcase-comment">In the first move Janusz can move the bishop to the cell (4,6).
+Please note that this is the largest possible return value: whenever there is a solution, there is a solution that uses at most two moves.</div>
                     </div>
                     
                
@@ -460,19 +528,37 @@ li.testcase .data {
                         <ul class="variables">
                         
                             <li class="variable data">
-                                <span class="name data">archive</span>
+                                <span class="name data">r1</span>
                                 <span class="value data">
                                 
-                                    &quot;111011011000100110&quot;
+                                    4
                                 
                                 </span>
                             </li>
                         
                             <li class="variable data">
-                                <span class="name data">dictionary</span>
+                                <span class="name data">c1</span>
                                 <span class="value data">
                                 
-                                    { &quot;010&quot;, &quot;00&quot;, &quot;0110&quot;, &quot;0111&quot;, &quot;11&quot;, &quot;100&quot;, &quot;101&quot; }
+                                    6
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">r2</span>
+                                <span class="value data">
+                                
+                                    7
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">c2</span>
+                                <span class="value data">
+                                
+                                    4
                                 
                                 </span>
                             </li>
@@ -484,49 +570,14 @@ li.testcase .data {
                         <span class="prefix data">Returns</span>
                         <span class="value data">
                         
-                            &quot;EGGFAC&quot;
+                            -1
                         
                         </span>
                     </div>
                     
-               
-                </div>
-            </li>
-            
-            <li class="testcase">
-                <div class="testcase-content">
-                    <div class="testcase-input">
-                        <div class='tag'>input</div>
-                        <ul class="variables">
-                        
-                            <li class="variable data">
-                                <span class="name data">archive</span>
-                                <span class="value data">
-                                
-                                    &quot;001101100101100110111101011001011001010&quot;
-                                
-                                </span>
-                            </li>
-                        
-                            <li class="variable data">
-                                <span class="name data">dictionary</span>
-                                <span class="value data">
-                                
-                                    { &quot;110&quot;, &quot;011&quot;, &quot;10&quot;, &quot;0011&quot;, &quot;00011&quot;, &quot;111&quot;, &quot;00010&quot;, &quot;0010&quot;, &quot;010&quot;, &quot;0000&quot; }
-                                
-                                </span>
-                            </li>
-                        
-                        </ul>
-                    </div>
-                    <div class="testcase-output">
-                        <div class='tag'>output</div>
-                        <span class="prefix data">Returns</span>
-                        <span class="value data">
-                        
-                            &quot;DBHABBACAIAIC&quot;
-                        
-                        </span>
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment">If the bishop starts at (4,6), it can never reach (7,4).</div>
                     </div>
                     
                

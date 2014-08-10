@@ -1,0 +1,57 @@
+-- Example 0
+4
+introduction
+story
+introduction
+edification
+
+1
+-- Example 1
+6
+introduction
+story
+edification
+introduction
+story
+edification
+
+2
+-- Example 2
+6
+introduction
+story
+introduction
+edification
+story
+introduction
+
+1
+-- Example 3
+25
+introduction
+story
+introduction
+edification
+story
+story
+edification
+edification
+edification
+introduction
+introduction
+edification
+story
+introduction
+story
+edification
+edification
+story
+introduction
+edification
+story
+story
+edification
+introduction
+story
+
+5

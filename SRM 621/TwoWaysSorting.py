@@ -1,24 +1,28 @@
 # -*- coding: utf-8 -*-
 import math,string,itertools,fractions,heapq,collections,re,array,bisect
 
-class HuffmanDecoding:
-    def decode(self, archive, dictionary):
-        ans = []
-        pos = 0
-        d = {}
-        for id, i in enumerate(dictionary):
-            d[i] = id
+class TwoWaysSorting:
+    def sortingMethod(self, stringList):
+        S = stringList
+        lex = True
+        asc = True
 
-        i = 0
-        chunk = 0
-        while i < len(archive):
-            chunk = 1
-            while chunk < len(archive[i:]) and archive[i:i+chunk] not in d:
-                chunk+=1
-            ans.append(chr(65+d[archive[i:i+chunk]]))
+        for i in range(1, len(S)):
+            if len(S[i-1]) > len(S[i]):
+                asc = False
+            for j in range(len(S[i-1])):
+                if j < len(S[i]) and S[i-1][j] > S[i][j]:
+                    lex = False
 
-            i = i+chunk
-        return "".join(ans)
+        if lex and asc:
+            return "both"
+        if lex:
+            return "lexicographically"
+        if asc:
+            return "lengths"
+        return "none"
+
+
 # CUT begin
 # TEST CODE FOR PYTHON {{{
 import sys, time, math
@@ -47,12 +51,12 @@ def pretty_str(x):
     else:
         return str(x)
 
-def do_test(archive, dictionary, __expected):
+def do_test(stringList, __expected):
     startTime = time.time()
-    instance = HuffmanDecoding()
+    instance = TwoWaysSorting()
     exception = None
     try:
-        __result = instance.decode(archive, dictionary);
+        __result = instance.sortingMethod(stringList);
     except:
         import traceback
         exception = traceback.format_exc()
@@ -73,36 +77,35 @@ def do_test(archive, dictionary, __expected):
         return 0
 
 def run_tests():
-    sys.stdout.write("HuffmanDecoding (450 Points)\n\n")
+    sys.stdout.write("TwoWaysSorting (250 Points)\n\n")
 
     passed = cases = 0
     case_set = set()
     for arg in sys.argv[1:]:
         case_set.add(int(arg))
 
-    with open("HuffmanDecoding.sample", "r") as f:
+    with open("TwoWaysSorting.sample", "r") as f:
         while True:
             label = f.readline()
             if not label.startswith("--"): break
 
-            archive = f.readline().rstrip()
-            dictionary = []
+            stringList = []
             for i in range(0, int(f.readline())):
-                dictionary.append(f.readline().rstrip())
-            dictionary = tuple(dictionary)
+                stringList.append(f.readline().rstrip())
+            stringList = tuple(stringList)
             f.readline()
             __answer = f.readline().rstrip()
 
             cases += 1
             if len(case_set) > 0 and (cases - 1) in case_set: continue
             sys.stdout.write("  Testcase #%d ... " % (cases - 1))
-            passed += do_test(archive, dictionary, __answer)
+            passed += do_test(stringList, __answer)
 
     sys.stdout.write("\nPassed : %d / %d cases\n" % (passed, cases))
 
-    T = time.time() - 1389062244
+    T = time.time() - 1407620763
     PT, TT = (T / 60.0, 75.0)
-    points = 450 * (0.3 + (0.7 * TT * TT) / (10.0 * PT * PT + TT * TT))
+    points = 250 * (0.3 + (0.7 * TT * TT) / (10.0 * PT * PT + TT * TT))
     sys.stdout.write("Time   : %d minutes %d secs\n" % (int(T/60), T%60))
     sys.stdout.write("Score  : %.2f points\n" % points)
 

@@ -1,0 +1,47 @@
+-- Example 0
+4
+ball
+plane
+robot
+puzzle
+3
+
+3
+ball puzzle
+plane
+robot
+-- Example 1
+5
+ball
+plane
+robot
+puzzle
+bike
+1
+
+1
+ball plane robot puzzle
+-- Example 2
+4
+ball
+ball
+plane
+plane
+2
+
+2
+ball plane
+ball plane
+-- Example 3
+3
+ball
+plane
+robot
+5
+
+5
+ball
+plane
+robot
+
+

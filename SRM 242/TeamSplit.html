@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>TopCoder SRM 308 - 450: HuffmanDecoding</title>
+    <title>TopCoder SRM 242 - 250: TeamSplit</title>
     
     <link type="image/x-icon" rel="shortcut icon" href="http://www.topcoder.com/i/favicon.ico"/>
     
@@ -213,10 +213,10 @@ li.testcase .data {
 
 <body>
     <h1 class="heading">
-        <span id='contest-name'>SRM 308</span>
+        <span id='contest-name'>SRM 242</span>
         <span id='contest-division'>2</span>
-        <span id='problem-score'>450</span>
-        <span id='problem-name'>HuffmanDecoding</span>
+        <span id='problem-score'>250</span>
+        <span id='problem-name'>TeamSplit</span>
     </h1>
 
     <hr />
@@ -225,8 +225,33 @@ li.testcase .data {
     <div class="section">
         <h2 class="section-title">Problem Statement</h2>
         <div class="problem-intro">
-            <intro><p>When text is encoded using Huffman codes, each symbol is replaced by a string of 0s and 1s called a bit string representation.  The replacement is done in such a way that the bit string representation of a symbol is never the prefix of the bit string representation of any other symbol.  This property allows us to unambiguously decode the encoded text.</p>
-<p>You will be given a <type>String</type> <b>archive</b> and a <type>String[]</type> <b>dictionary</b>. The i-th element of <b>dictionary</b> will be the bit string representation of the i-th uppercase letter. Decode <b>archive</b> using <b>dictionary</b> and return the result as a single <type>String</type>.</p></intro>
+            <intro><p>
+You want to split some people into two teams to play a game.
+In order to make the split, you first designate two
+team captains who take alternate turns selecting players for their teams.
+During each turn, the captain selects a single player for his team.
+Since each captain wants to make the strongest possible team, he will
+always select the best available player.
+The players have strengths, which are given in the <type>int[]</type>
+<b>strengths</b>, where higher numbers indicate better players. After all
+the players have been selected, the team strength
+is computed as the sum of the strengths of the players on that team.
+</p>
+
+<p>
+For example, if <b>strengths</b>={5,7,8,4,2}, then the first captain selects
+the player with strength 8 for his team, the second captain gets the player
+with strength 7, the first gets the one with strength 5, the second the
+one with strength 4, and the last one (strength 2) goes to the first team.
+The first team now has a total strength 8+5+2=15, and the second team has
+strength 7+4=11.
+</p>
+
+<p>
+Return the absolute strength difference between the two teams. For the
+example above you should return 4 (=15-11).
+</p>
+</intro>
         </div>
     </div>
     
@@ -238,32 +263,30 @@ li.testcase .data {
             <ul class="problem-definition-lines">
                 <li class="definition-line" id='class-line'>
                     <span class='definition-name'>Class</span>
-                    <span class='definition-value'>HuffmanDecoding</span>
+                    <span class='definition-value'>TeamSplit</span>
                 </li>
                 <li class="definition-line" id='method-line'>
                     <span class='definition-name'>Method</span>
-                    <span class='definition-value'>decode</span>
+                    <span class='definition-value'>difference</span>
                 </li>
                 <li class="definition-line" id='parameters-line'>
                     <span class='definition-name'>Parameters</span>
                     <span class='definition-value'>
                     
-                        string
-                    , 
-                        tuple(string)
+                        tuple(integer)
                     
                     </span>
                 </li>
                 <li class="definition-line" id='returns-line'>
                     <span class='definition-name'>Returns</span>
                     <span class='definition-value'>
-                        string
+                        integer
                     </span>
                 </li>
                 <li class="definition-line" id='signature-line'>
                     <span class='definition-name'>Method signature</span>
                     <span class='definition-value'>
-                        def decode(self, archive, dictionary)
+                        def difference(self, strengths)
                     </span>
                 </li>
             </ul>
@@ -296,19 +319,9 @@ li.testcase .data {
         <h2 class="section-title">Constraints</h2>
         <ul class="constraints">
         
-            <li><user-constraint><b>archive</b> will contain between 1 and 50 characters, inclusive. </user-constraint></li>
+            <li><user-constraint><b>strengths</b> will have between 1 and 50 elements, inclusive.</user-constraint></li>
         
-            <li><user-constraint><b>archive</b> will contain only the characters '0' (zero) and '1' (one).</user-constraint></li>
-        
-            <li><user-constraint><b>dictionary</b> will contain between 1 and 26 elements, inclusive. </user-constraint></li>
-        
-            <li><user-constraint>Each element of <b>dictionary</b> will contain between 1 and 50 characters, inclusive. </user-constraint></li>
-        
-            <li><user-constraint>Each element of <b>dictionary</b> will contain only the characters '0' (zero) and '1' (one).</user-constraint></li>
-        
-            <li><user-constraint>No element of <b>dictionary</b> will be a prefix of any other element of <b>dictionary</b>.</user-constraint></li>
-        
-            <li><user-constraint><b>archive</b> will be decodable using <b>dictionary</b></user-constraint></li>
+            <li><user-constraint>Each element of <b>strengths</b> will be between 1 and 1000, inclusive.</user-constraint></li>
         
         </ul>
     </div>
@@ -325,19 +338,10 @@ li.testcase .data {
                         <ul class="variables">
                         
                             <li class="variable data">
-                                <span class="name data">archive</span>
+                                <span class="name data">strengths</span>
                                 <span class="value data">
                                 
-                                    &quot;101101&quot;
-                                
-                                </span>
-                            </li>
-                        
-                            <li class="variable data">
-                                <span class="name data">dictionary</span>
-                                <span class="value data">
-                                
-                                    {&quot;00&quot;,<br />&nbsp;&quot;10&quot;,<br />&nbsp;&quot;01&quot;,<br />&nbsp;&quot;11&quot;}
+                                    { 5, 7, 8, 4, 2 }
                                 
                                 </span>
                             </li>
@@ -349,14 +353,14 @@ li.testcase .data {
                         <span class="prefix data">Returns</span>
                         <span class="value data">
                         
-                            &quot;BDC&quot;
+                            4
                         
                         </span>
                     </div>
                     
                     <div class="testcase-annotation">
                         <div class='tag'>note</div>
-                        <div class="testcase-comment">Because there are no elements in dictionary that are prefixes of other elements, only one element of dictionary will be a prefix of <b>archive</b>.  In this case, it is the second element (&quot;10&quot;) which represents 'B'.  The rest of the text can be decoded using the same logic.</div>
+                        <div class="testcase-comment">The example from the problem statement.</div>
                     </div>
                     
                
@@ -370,19 +374,10 @@ li.testcase .data {
                         <ul class="variables">
                         
                             <li class="variable data">
-                                <span class="name data">archive</span>
+                                <span class="name data">strengths</span>
                                 <span class="value data">
                                 
-                                    &quot;10111010&quot;
-                                
-                                </span>
-                            </li>
-                        
-                            <li class="variable data">
-                                <span class="name data">dictionary</span>
-                                <span class="value data">
-                                
-                                    { &quot;0&quot;, &quot;111&quot;, &quot;10&quot; }
+                                    { 100 }
                                 
                                 </span>
                             </li>
@@ -394,14 +389,14 @@ li.testcase .data {
                         <span class="prefix data">Returns</span>
                         <span class="value data">
                         
-                            &quot;CBAC&quot;
+                            100
                         
                         </span>
                     </div>
                     
                     <div class="testcase-annotation">
                         <div class='tag'>note</div>
-                        <div class="testcase-comment">Note that elements of <b>dictionary</b> can be of different lengths.</div>
+                        <div class="testcase-comment">A boring game with only one player. The second team has strength 0 (no players).</div>
                     </div>
                     
                
@@ -415,19 +410,10 @@ li.testcase .data {
                         <ul class="variables">
                         
                             <li class="variable data">
-                                <span class="name data">archive</span>
+                                <span class="name data">strengths</span>
                                 <span class="value data">
                                 
-                                    &quot;0001001100100111001&quot;
-                                
-                                </span>
-                            </li>
-                        
-                            <li class="variable data">
-                                <span class="name data">dictionary</span>
-                                <span class="value data">
-                                
-                                    {&quot;1&quot;,<br />&nbsp;&quot;0&quot;}
+                                    { 1000, 1000 }
                                 
                                 </span>
                             </li>
@@ -439,14 +425,14 @@ li.testcase .data {
                         <span class="prefix data">Returns</span>
                         <span class="value data">
                         
-                            &quot;BBBABBAABBABBAAABBA&quot;
+                            0
                         
                         </span>
                     </div>
                     
                     <div class="testcase-annotation">
                         <div class='tag'>note</div>
-                        <div class="testcase-comment">'1' is replaced by 'A', '0' is replaced by 'B'.</div>
+                        <div class="testcase-comment">Both teams with equal strength.</div>
                     </div>
                     
                
@@ -460,19 +446,10 @@ li.testcase .data {
                         <ul class="variables">
                         
                             <li class="variable data">
-                                <span class="name data">archive</span>
+                                <span class="name data">strengths</span>
                                 <span class="value data">
                                 
-                                    &quot;111011011000100110&quot;
-                                
-                                </span>
-                            </li>
-                        
-                            <li class="variable data">
-                                <span class="name data">dictionary</span>
-                                <span class="value data">
-                                
-                                    { &quot;010&quot;, &quot;00&quot;, &quot;0110&quot;, &quot;0111&quot;, &quot;11&quot;, &quot;100&quot;, &quot;101&quot; }
+                                    { 9, 8, 7, 6 }
                                 
                                 </span>
                             </li>
@@ -484,7 +461,7 @@ li.testcase .data {
                         <span class="prefix data">Returns</span>
                         <span class="value data">
                         
-                            &quot;EGGFAC&quot;
+                            2
                         
                         </span>
                     </div>
@@ -500,19 +477,10 @@ li.testcase .data {
                         <ul class="variables">
                         
                             <li class="variable data">
-                                <span class="name data">archive</span>
+                                <span class="name data">strengths</span>
                                 <span class="value data">
                                 
-                                    &quot;001101100101100110111101011001011001010&quot;
-                                
-                                </span>
-                            </li>
-                        
-                            <li class="variable data">
-                                <span class="name data">dictionary</span>
-                                <span class="value data">
-                                
-                                    { &quot;110&quot;, &quot;011&quot;, &quot;10&quot;, &quot;0011&quot;, &quot;00011&quot;, &quot;111&quot;, &quot;00010&quot;, &quot;0010&quot;, &quot;010&quot;, &quot;0000&quot; }
+                                    { 1, 5, 10, 1, 5, 10 }
                                 
                                 </span>
                             </li>
@@ -524,7 +492,38 @@ li.testcase .data {
                         <span class="prefix data">Returns</span>
                         <span class="value data">
                         
-                            &quot;DBHABBACAIAIC&quot;
+                            0
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">strengths</span>
+                                <span class="value data">
+                                
+                                    { 824, 581, 9, 776, 149, 493, 531, 558, 995, 637, 394, 526, 986, 548, 344, 509, 319, 37, 790, 491, 479, 34, 776, 321, 258, 851, 711, 365, 763, 355, 386, 877, 596, 96, 151, 166, 558, 109, 874, 959, 845, 181, 976, 335, 930, 22, 78, 120, 907, 584 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            478
                         
                         </span>
                     </div>

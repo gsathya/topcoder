@@ -1,24 +1,26 @@
 # -*- coding: utf-8 -*-
 import math,string,itertools,fractions,heapq,collections,re,array,bisect
 
-class HuffmanDecoding:
-    def decode(self, archive, dictionary):
-        ans = []
-        pos = 0
-        d = {}
-        for id, i in enumerate(dictionary):
-            d[i] = id
+class Chivalry:
+    def getOrder(self, first, second):
+        i, j = 0, 0
+        ans = ""
+        while i < len(first) and j < len(second):
+            if first[i] == second[j]:
+                ans += first[i]
+                i += 1
+            elif first[i] == "W":
+                ans += first[i]
+                i += 1
+            elif second[j] == "W":
+                ans += second[j]
+                j += 1
+        if i < len(first):
+            ans += first[i:]
+        if j < len(second):
+            ans += second[j:]
+        return ans
 
-        i = 0
-        chunk = 0
-        while i < len(archive):
-            chunk = 1
-            while chunk < len(archive[i:]) and archive[i:i+chunk] not in d:
-                chunk+=1
-            ans.append(chr(65+d[archive[i:i+chunk]]))
-
-            i = i+chunk
-        return "".join(ans)
 # CUT begin
 # TEST CODE FOR PYTHON {{{
 import sys, time, math
@@ -47,12 +49,12 @@ def pretty_str(x):
     else:
         return str(x)
 
-def do_test(archive, dictionary, __expected):
+def do_test(first, second, __expected):
     startTime = time.time()
-    instance = HuffmanDecoding()
+    instance = Chivalry()
     exception = None
     try:
-        __result = instance.decode(archive, dictionary);
+        __result = instance.getOrder(first, second);
     except:
         import traceback
         exception = traceback.format_exc()
@@ -73,36 +75,33 @@ def do_test(archive, dictionary, __expected):
         return 0
 
 def run_tests():
-    sys.stdout.write("HuffmanDecoding (450 Points)\n\n")
+    sys.stdout.write("Chivalry (250 Points)\n\n")
 
     passed = cases = 0
     case_set = set()
     for arg in sys.argv[1:]:
         case_set.add(int(arg))
 
-    with open("HuffmanDecoding.sample", "r") as f:
+    with open("Chivalry.sample", "r") as f:
         while True:
             label = f.readline()
             if not label.startswith("--"): break
 
-            archive = f.readline().rstrip()
-            dictionary = []
-            for i in range(0, int(f.readline())):
-                dictionary.append(f.readline().rstrip())
-            dictionary = tuple(dictionary)
+            first = f.readline().rstrip()
+            second = f.readline().rstrip()
             f.readline()
             __answer = f.readline().rstrip()
 
             cases += 1
             if len(case_set) > 0 and (cases - 1) in case_set: continue
             sys.stdout.write("  Testcase #%d ... " % (cases - 1))
-            passed += do_test(archive, dictionary, __answer)
+            passed += do_test(first, second, __answer)
 
     sys.stdout.write("\nPassed : %d / %d cases\n" % (passed, cases))
 
-    T = time.time() - 1389062244
+    T = time.time() - 1407631964
     PT, TT = (T / 60.0, 75.0)
-    points = 450 * (0.3 + (0.7 * TT * TT) / (10.0 * PT * PT + TT * TT))
+    points = 250 * (0.3 + (0.7 * TT * TT) / (10.0 * PT * PT + TT * TT))
     sys.stdout.write("Time   : %d minutes %d secs\n" % (int(T/60), T%60))
     sys.stdout.write("Score  : %.2f points\n" % points)
 

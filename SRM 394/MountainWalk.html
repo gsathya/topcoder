@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>TopCoder SRM 308 - 450: HuffmanDecoding</title>
+    <title>TopCoder SRM 394 - 250: MountainWalk</title>
     
     <link type="image/x-icon" rel="shortcut icon" href="http://www.topcoder.com/i/favicon.ico"/>
     
@@ -213,10 +213,10 @@ li.testcase .data {
 
 <body>
     <h1 class="heading">
-        <span id='contest-name'>SRM 308</span>
+        <span id='contest-name'>SRM 394</span>
         <span id='contest-division'>2</span>
-        <span id='problem-score'>450</span>
-        <span id='problem-name'>HuffmanDecoding</span>
+        <span id='problem-score'>250</span>
+        <span id='problem-name'>MountainWalk</span>
     </h1>
 
     <hr />
@@ -225,8 +225,13 @@ li.testcase .data {
     <div class="section">
         <h2 class="section-title">Problem Statement</h2>
         <div class="problem-intro">
-            <intro><p>When text is encoded using Huffman codes, each symbol is replaced by a string of 0s and 1s called a bit string representation.  The replacement is done in such a way that the bit string representation of a symbol is never the prefix of the bit string representation of any other symbol.  This property allows us to unambiguously decode the encoded text.</p>
-<p>You will be given a <type>String</type> <b>archive</b> and a <type>String[]</type> <b>dictionary</b>. The i-th element of <b>dictionary</b> will be the bit string representation of the i-th uppercase letter. Decode <b>archive</b> using <b>dictionary</b> and return the result as a single <type>String</type>.</p></intro>
+            <intro escaped="1">You are in a mountainous area which is represented by a <type>String[]</type> <b>areaMap</b>. The j-th character of the i-th element of the <b>areaMap</b> is a digit '0'-'9' representing the height of cell (i, j). You perform a walk in the area according to the following rules:
+<ul>
+<li>You start from cell (0, 0).</li>
+<li>If you are in cell (i, j), you examine cells (i+1, j), (i, j-1), (i-1, j), (i, j+1) in this order. You go to the first of these cells you can enter. You can enter a cell if it is still on the map, you haven't been to it before and the difference between the heights of your current cell and the cell you want to enter is no bigger (in absolute value) than <b>heightDifference</b>.</li>
+<li>You end your walk if you can not make another move, i.e., if you can not enter any neighboring cell.</li>
+</ul>
+You must return the number of cells that you visit while performing your walk. You visit cell (i, j) if and only if you enter cell (i, j) at some point during your walk (the starting cell (0, 0) also counts as entered, i.e., you definitely visit (0, 0)). Note that you will visit each cell at most once since you never enter the same cell twice.</intro>
         </div>
     </div>
     
@@ -238,32 +243,32 @@ li.testcase .data {
             <ul class="problem-definition-lines">
                 <li class="definition-line" id='class-line'>
                     <span class='definition-name'>Class</span>
-                    <span class='definition-value'>HuffmanDecoding</span>
+                    <span class='definition-value'>MountainWalk</span>
                 </li>
                 <li class="definition-line" id='method-line'>
                     <span class='definition-name'>Method</span>
-                    <span class='definition-value'>decode</span>
+                    <span class='definition-value'>cellsVisited</span>
                 </li>
                 <li class="definition-line" id='parameters-line'>
                     <span class='definition-name'>Parameters</span>
                     <span class='definition-value'>
                     
-                        string
-                    , 
                         tuple(string)
+                    , 
+                        integer
                     
                     </span>
                 </li>
                 <li class="definition-line" id='returns-line'>
                     <span class='definition-name'>Returns</span>
                     <span class='definition-value'>
-                        string
+                        integer
                     </span>
                 </li>
                 <li class="definition-line" id='signature-line'>
                     <span class='definition-name'>Method signature</span>
                     <span class='definition-value'>
-                        def decode(self, archive, dictionary)
+                        def cellsVisited(self, areaMap, heightDifference)
                     </span>
                 </li>
             </ul>
@@ -296,19 +301,13 @@ li.testcase .data {
         <h2 class="section-title">Constraints</h2>
         <ul class="constraints">
         
-            <li><user-constraint><b>archive</b> will contain between 1 and 50 characters, inclusive. </user-constraint></li>
+            <li><user-constraint escaped="1"><b>areaMap</b> will contain between 1 and 50 elements, inclusive.</user-constraint></li>
         
-            <li><user-constraint><b>archive</b> will contain only the characters '0' (zero) and '1' (one).</user-constraint></li>
+            <li><user-constraint escaped="1">All the elements of <b>areaMap</b> will contain the same number of characters.</user-constraint></li>
         
-            <li><user-constraint><b>dictionary</b> will contain between 1 and 26 elements, inclusive. </user-constraint></li>
+            <li><user-constraint escaped="1">Each element of <b>areaMap</b> will contain between 1 and 50 digits ('0' - '9'), inclusive.</user-constraint></li>
         
-            <li><user-constraint>Each element of <b>dictionary</b> will contain between 1 and 50 characters, inclusive. </user-constraint></li>
-        
-            <li><user-constraint>Each element of <b>dictionary</b> will contain only the characters '0' (zero) and '1' (one).</user-constraint></li>
-        
-            <li><user-constraint>No element of <b>dictionary</b> will be a prefix of any other element of <b>dictionary</b>.</user-constraint></li>
-        
-            <li><user-constraint><b>archive</b> will be decodable using <b>dictionary</b></user-constraint></li>
+            <li><user-constraint escaped="1"><b>heightDifference</b> will be between 0 and 9, inclusive.</user-constraint></li>
         
         </ul>
     </div>
@@ -325,19 +324,19 @@ li.testcase .data {
                         <ul class="variables">
                         
                             <li class="variable data">
-                                <span class="name data">archive</span>
+                                <span class="name data">areaMap</span>
                                 <span class="value data">
                                 
-                                    &quot;101101&quot;
+                                    {&quot;056&quot;,<br />&nbsp;&quot;135&quot;,<br />&nbsp;&quot;234&quot;}
                                 
                                 </span>
                             </li>
                         
                             <li class="variable data">
-                                <span class="name data">dictionary</span>
+                                <span class="name data">heightDifference</span>
                                 <span class="value data">
                                 
-                                    {&quot;00&quot;,<br />&nbsp;&quot;10&quot;,<br />&nbsp;&quot;01&quot;,<br />&nbsp;&quot;11&quot;}
+                                    1
                                 
                                 </span>
                             </li>
@@ -349,14 +348,14 @@ li.testcase .data {
                         <span class="prefix data">Returns</span>
                         <span class="value data">
                         
-                            &quot;BDC&quot;
+                            5
                         
                         </span>
                     </div>
                     
                     <div class="testcase-annotation">
                         <div class='tag'>note</div>
-                        <div class="testcase-comment">Because there are no elements in dictionary that are prefixes of other elements, only one element of dictionary will be a prefix of <b>archive</b>.  In this case, it is the second element (&quot;10&quot;) which represents 'B'.  The rest of the text can be decoded using the same logic.</div>
+                        <div class="testcase-comment">Your path goes (0, 0) --&gt; (1, 0) --&gt; (2, 0) --&gt; (2, 1) --&gt; (1, 1) and so you visit 5 cells.</div>
                     </div>
                     
                
@@ -370,19 +369,19 @@ li.testcase .data {
                         <ul class="variables">
                         
                             <li class="variable data">
-                                <span class="name data">archive</span>
+                                <span class="name data">areaMap</span>
                                 <span class="value data">
                                 
-                                    &quot;10111010&quot;
+                                    {&quot;056&quot;,<br />&nbsp;&quot;195&quot;,<br />&nbsp;&quot;234&quot;}
                                 
                                 </span>
                             </li>
                         
                             <li class="variable data">
-                                <span class="name data">dictionary</span>
+                                <span class="name data">heightDifference</span>
                                 <span class="value data">
                                 
-                                    { &quot;0&quot;, &quot;111&quot;, &quot;10&quot; }
+                                    1
                                 
                                 </span>
                             </li>
@@ -394,14 +393,14 @@ li.testcase .data {
                         <span class="prefix data">Returns</span>
                         <span class="value data">
                         
-                            &quot;CBAC&quot;
+                            8
                         
                         </span>
                     </div>
                     
                     <div class="testcase-annotation">
                         <div class='tag'>note</div>
-                        <div class="testcase-comment">Note that elements of <b>dictionary</b> can be of different lengths.</div>
+                        <div class="testcase-comment">Now you can not enter the cell (1, 1) because of the cell difference so your path goes (0, 0) --&gt; (1, 0) --&gt; (2, 0) --&gt; (2, 1) --&gt; (2, 2) --&gt; (1, 2) --&gt; (0, 2) --&gt; (0, 1).</div>
                     </div>
                     
                
@@ -415,19 +414,19 @@ li.testcase .data {
                         <ul class="variables">
                         
                             <li class="variable data">
-                                <span class="name data">archive</span>
+                                <span class="name data">areaMap</span>
                                 <span class="value data">
                                 
-                                    &quot;0001001100100111001&quot;
+                                    {&quot;865&quot;,<br />&nbsp;&quot;123&quot;,<br />&nbsp;&quot;111&quot;}
                                 
                                 </span>
                             </li>
                         
                             <li class="variable data">
-                                <span class="name data">dictionary</span>
+                                <span class="name data">heightDifference</span>
                                 <span class="value data">
                                 
-                                    {&quot;1&quot;,<br />&nbsp;&quot;0&quot;}
+                                    3
                                 
                                 </span>
                             </li>
@@ -439,14 +438,14 @@ li.testcase .data {
                         <span class="prefix data">Returns</span>
                         <span class="value data">
                         
-                            &quot;BBBABBAABBABBAAABBA&quot;
+                            9
                         
                         </span>
                     </div>
                     
                     <div class="testcase-annotation">
                         <div class='tag'>note</div>
-                        <div class="testcase-comment">'1' is replaced by 'A', '0' is replaced by 'B'.</div>
+                        <div class="testcase-comment">Your path is (0, 0) --&gt; (0, 1) --&gt; (0, 2) --&gt; (1, 2) --&gt; (2, 2) --&gt; (2, 1) --&gt; (2, 0) --&gt; (1, 0) --&gt; (1, 1).</div>
                     </div>
                     
                
@@ -460,19 +459,19 @@ li.testcase .data {
                         <ul class="variables">
                         
                             <li class="variable data">
-                                <span class="name data">archive</span>
+                                <span class="name data">areaMap</span>
                                 <span class="value data">
                                 
-                                    &quot;111011011000100110&quot;
+                                    {&quot;00009876543210&quot;,<br />&nbsp;&quot;00009876543210&quot;,<br />&nbsp;&quot;00009876543210&quot;,<br />&nbsp;&quot;00009876543210&quot;}
                                 
                                 </span>
                             </li>
                         
                             <li class="variable data">
-                                <span class="name data">dictionary</span>
+                                <span class="name data">heightDifference</span>
                                 <span class="value data">
                                 
-                                    { &quot;010&quot;, &quot;00&quot;, &quot;0110&quot;, &quot;0111&quot;, &quot;11&quot;, &quot;100&quot;, &quot;101&quot; }
+                                    8
                                 
                                 </span>
                             </li>
@@ -484,7 +483,7 @@ li.testcase .data {
                         <span class="prefix data">Returns</span>
                         <span class="value data">
                         
-                            &quot;EGGFAC&quot;
+                            16
                         
                         </span>
                     </div>
@@ -500,19 +499,19 @@ li.testcase .data {
                         <ul class="variables">
                         
                             <li class="variable data">
-                                <span class="name data">archive</span>
+                                <span class="name data">areaMap</span>
                                 <span class="value data">
                                 
-                                    &quot;001101100101100110111101011001011001010&quot;
+                                    {&quot;0000&quot;,<br />&nbsp;&quot;0000&quot;,<br />&nbsp;&quot;0000&quot;,<br />&nbsp;&quot;0000&quot;,<br />&nbsp;&quot;9999&quot;,<br />&nbsp;&quot;8888&quot;,<br />&nbsp;&quot;7777&quot;,<br />&nbsp;&quot;6666&quot;,<br />&nbsp;&quot;5555&quot;,<br />&nbsp;&quot;4444&quot;,<br />&nbsp;&quot;3333&quot;,<br />&nbsp;&quot;2222&quot;,<br />&nbsp;&quot;1111&quot;,<br />&nbsp;&quot;0000&quot;}
                                 
                                 </span>
                             </li>
                         
                             <li class="variable data">
-                                <span class="name data">dictionary</span>
+                                <span class="name data">heightDifference</span>
                                 <span class="value data">
                                 
-                                    { &quot;110&quot;, &quot;011&quot;, &quot;10&quot;, &quot;0011&quot;, &quot;00011&quot;, &quot;111&quot;, &quot;00010&quot;, &quot;0010&quot;, &quot;010&quot;, &quot;0000&quot; }
+                                    3
                                 
                                 </span>
                             </li>
@@ -524,7 +523,87 @@ li.testcase .data {
                         <span class="prefix data">Returns</span>
                         <span class="value data">
                         
-                            &quot;DBHABBACAIAIC&quot;
+                            16
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">areaMap</span>
+                                <span class="value data">
+                                
+                                    {&quot;173642855131893831828253420&quot;,<br />&nbsp;&quot;126290035950506994475683704&quot;,<br />&nbsp;&quot;381277675415026563959463393&quot;,<br />&nbsp;&quot;019782700912864681764582260&quot;,<br />&nbsp;&quot;496448425114634806770407597&quot;,<br />&nbsp;&quot;049628433145840178727435051&quot;,<br />&nbsp;&quot;117194708226266248973780562&quot;,<br />&nbsp;&quot;398138380998246682323622510&quot;,<br />&nbsp;&quot;408178777661559971959512111&quot;}
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">heightDifference</span>
+                                <span class="value data">
+                                
+                                    8
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            135
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">areaMap</span>
+                                <span class="value data">
+                                
+                                    { &quot;9&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">heightDifference</span>
+                                <span class="value data">
+                                
+                                    0
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            1
                         
                         </span>
                     </div>

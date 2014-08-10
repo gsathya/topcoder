@@ -1,24 +1,45 @@
 # -*- coding: utf-8 -*-
 import math,string,itertools,fractions,heapq,collections,re,array,bisect
 
-class HuffmanDecoding:
-    def decode(self, archive, dictionary):
-        ans = []
-        pos = 0
-        d = {}
-        for id, i in enumerate(dictionary):
-            d[i] = id
+class MountainWalk:
+    def possible(self, a, b):
+        if (a, b) in self.visited:
+            return False
+            
+        if a < 0 or a > self.max_x-1:
+            return False
+        if b < 0 or b > self.max_y-1:
+            return False
 
-        i = 0
-        chunk = 0
-        while i < len(archive):
-            chunk = 1
-            while chunk < len(archive[i:]) and archive[i:i+chunk] not in d:
-                chunk+=1
-            ans.append(chr(65+d[archive[i:i+chunk]]))
+        val = int(self.areaMap[self.x][self.y])
+        if abs(int(self.areaMap[a][b]) - val) <= self.heightDifference:
+            self.x = a
+            self.y = b
+            return True
+            
+    def cellsVisited(self, areaMap, heightDifference):
+        self.visited = {}
+        self.areaMap = areaMap
+        self.heightDifference = heightDifference
+        self.max_x = len(areaMap)
+        self.max_y = len(areaMap[0])
+        self.x =0
+        self.y = 0
+        a = 1
+        while True:
+            self.visited[(self.x, self.y)] =True            
+            if self.possible(self.x+1, self.y):
+                a += 1
+            elif self.possible(self.x,self.y-1):
+                a += 1
+            elif self.possible(self.x-1,self.y):
+                a += 1
+            elif self.possible(self.x,self.y+1):
+                a+=1
+            else:
+                break
+        return a
 
-            i = i+chunk
-        return "".join(ans)
 # CUT begin
 # TEST CODE FOR PYTHON {{{
 import sys, time, math
@@ -47,12 +68,12 @@ def pretty_str(x):
     else:
         return str(x)
 
-def do_test(archive, dictionary, __expected):
+def do_test(areaMap, heightDifference, __expected):
     startTime = time.time()
-    instance = HuffmanDecoding()
+    instance = MountainWalk()
     exception = None
     try:
-        __result = instance.decode(archive, dictionary);
+        __result = instance.cellsVisited(areaMap, heightDifference);
     except:
         import traceback
         exception = traceback.format_exc()
@@ -73,36 +94,36 @@ def do_test(archive, dictionary, __expected):
         return 0
 
 def run_tests():
-    sys.stdout.write("HuffmanDecoding (450 Points)\n\n")
+    sys.stdout.write("MountainWalk (250 Points)\n\n")
 
     passed = cases = 0
     case_set = set()
     for arg in sys.argv[1:]:
         case_set.add(int(arg))
 
-    with open("HuffmanDecoding.sample", "r") as f:
+    with open("MountainWalk.sample", "r") as f:
         while True:
             label = f.readline()
             if not label.startswith("--"): break
 
-            archive = f.readline().rstrip()
-            dictionary = []
+            areaMap = []
             for i in range(0, int(f.readline())):
-                dictionary.append(f.readline().rstrip())
-            dictionary = tuple(dictionary)
+                areaMap.append(f.readline().rstrip())
+            areaMap = tuple(areaMap)
+            heightDifference = int(f.readline().rstrip())
             f.readline()
-            __answer = f.readline().rstrip()
+            __answer = int(f.readline().rstrip())
 
             cases += 1
             if len(case_set) > 0 and (cases - 1) in case_set: continue
             sys.stdout.write("  Testcase #%d ... " % (cases - 1))
-            passed += do_test(archive, dictionary, __answer)
+            passed += do_test(areaMap, heightDifference, __answer)
 
     sys.stdout.write("\nPassed : %d / %d cases\n" % (passed, cases))
 
-    T = time.time() - 1389062244
+    T = time.time() - 1407626612
     PT, TT = (T / 60.0, 75.0)
-    points = 450 * (0.3 + (0.7 * TT * TT) / (10.0 * PT * PT + TT * TT))
+    points = 250 * (0.3 + (0.7 * TT * TT) / (10.0 * PT * PT + TT * TT))
     sys.stdout.write("Time   : %d minutes %d secs\n" % (int(T/60), T%60))
     sys.stdout.write("Score  : %.2f points\n" % points)
 

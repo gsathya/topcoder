@@ -1,24 +1,27 @@
 # -*- coding: utf-8 -*-
 import math,string,itertools,fractions,heapq,collections,re,array,bisect
 
-class HuffmanDecoding:
-    def decode(self, archive, dictionary):
-        ans = []
-        pos = 0
-        d = {}
-        for id, i in enumerate(dictionary):
-            d[i] = id
+class TeamSplit:
+    def difference(self, strengths):
+        s1 = 0
+        s2 = 0
 
-        i = 0
-        chunk = 0
-        while i < len(archive):
-            chunk = 1
-            while chunk < len(archive[i:]) and archive[i:i+chunk] not in d:
-                chunk+=1
-            ans.append(chr(65+d[archive[i:i+chunk]]))
+        s = list(strengths)
+        s.sort(reverse=True)
 
-            i = i+chunk
-        return "".join(ans)
+        z = 1
+        for i in s:
+            if z %2 == 0:
+                s1 += i
+            else:
+                s2 += i
+            z += 1
+        if s1 > s2:
+            return s1 - s2
+        else:
+            return s2 - s1
+            
+
 # CUT begin
 # TEST CODE FOR PYTHON {{{
 import sys, time, math
@@ -47,12 +50,12 @@ def pretty_str(x):
     else:
         return str(x)
 
-def do_test(archive, dictionary, __expected):
+def do_test(strengths, __expected):
     startTime = time.time()
-    instance = HuffmanDecoding()
+    instance = TeamSplit()
     exception = None
     try:
-        __result = instance.decode(archive, dictionary);
+        __result = instance.difference(strengths);
     except:
         import traceback
         exception = traceback.format_exc()
@@ -73,36 +76,35 @@ def do_test(archive, dictionary, __expected):
         return 0
 
 def run_tests():
-    sys.stdout.write("HuffmanDecoding (450 Points)\n\n")
+    sys.stdout.write("TeamSplit (250 Points)\n\n")
 
     passed = cases = 0
     case_set = set()
     for arg in sys.argv[1:]:
         case_set.add(int(arg))
 
-    with open("HuffmanDecoding.sample", "r") as f:
+    with open("TeamSplit.sample", "r") as f:
         while True:
             label = f.readline()
             if not label.startswith("--"): break
 
-            archive = f.readline().rstrip()
-            dictionary = []
+            strengths = []
             for i in range(0, int(f.readline())):
-                dictionary.append(f.readline().rstrip())
-            dictionary = tuple(dictionary)
+                strengths.append(int(f.readline().rstrip()))
+            strengths = tuple(strengths)
             f.readline()
-            __answer = f.readline().rstrip()
+            __answer = int(f.readline().rstrip())
 
             cases += 1
             if len(case_set) > 0 and (cases - 1) in case_set: continue
             sys.stdout.write("  Testcase #%d ... " % (cases - 1))
-            passed += do_test(archive, dictionary, __answer)
+            passed += do_test(strengths, __answer)
 
     sys.stdout.write("\nPassed : %d / %d cases\n" % (passed, cases))
 
-    T = time.time() - 1389062244
+    T = time.time() - 1407622370
     PT, TT = (T / 60.0, 75.0)
-    points = 450 * (0.3 + (0.7 * TT * TT) / (10.0 * PT * PT + TT * TT))
+    points = 250 * (0.3 + (0.7 * TT * TT) / (10.0 * PT * PT + TT * TT))
     sys.stdout.write("Time   : %d minutes %d secs\n" % (int(T/60), T%60))
     sys.stdout.write("Score  : %.2f points\n" % points)
 

@@ -1,24 +1,17 @@
 # -*- coding: utf-8 -*-
 import math,string,itertools,fractions,heapq,collections,re,array,bisect
 
-class HuffmanDecoding:
-    def decode(self, archive, dictionary):
-        ans = []
-        pos = 0
-        d = {}
-        for id, i in enumerate(dictionary):
-            d[i] = id
+class LISNumberDivTwo:
+    def calculate(self, seq):
+        ans = 0
+        i = 1
+        while i < len(seq):
+            if seq[i-1] >= seq[i]:
+                ans += 1
+            i += 1
 
-        i = 0
-        chunk = 0
-        while i < len(archive):
-            chunk = 1
-            while chunk < len(archive[i:]) and archive[i:i+chunk] not in d:
-                chunk+=1
-            ans.append(chr(65+d[archive[i:i+chunk]]))
+        return ans+1
 
-            i = i+chunk
-        return "".join(ans)
 # CUT begin
 # TEST CODE FOR PYTHON {{{
 import sys, time, math
@@ -47,12 +40,12 @@ def pretty_str(x):
     else:
         return str(x)
 
-def do_test(archive, dictionary, __expected):
+def do_test(seq, __expected):
     startTime = time.time()
-    instance = HuffmanDecoding()
+    instance = LISNumberDivTwo()
     exception = None
     try:
-        __result = instance.decode(archive, dictionary);
+        __result = instance.calculate(seq);
     except:
         import traceback
         exception = traceback.format_exc()
@@ -73,36 +66,35 @@ def do_test(archive, dictionary, __expected):
         return 0
 
 def run_tests():
-    sys.stdout.write("HuffmanDecoding (450 Points)\n\n")
+    sys.stdout.write("LISNumberDivTwo (250 Points)\n\n")
 
     passed = cases = 0
     case_set = set()
     for arg in sys.argv[1:]:
         case_set.add(int(arg))
 
-    with open("HuffmanDecoding.sample", "r") as f:
+    with open("LISNumberDivTwo.sample", "r") as f:
         while True:
             label = f.readline()
             if not label.startswith("--"): break
 
-            archive = f.readline().rstrip()
-            dictionary = []
+            seq = []
             for i in range(0, int(f.readline())):
-                dictionary.append(f.readline().rstrip())
-            dictionary = tuple(dictionary)
+                seq.append(int(f.readline().rstrip()))
+            seq = tuple(seq)
             f.readline()
-            __answer = f.readline().rstrip()
+            __answer = int(f.readline().rstrip())
 
             cases += 1
             if len(case_set) > 0 and (cases - 1) in case_set: continue
             sys.stdout.write("  Testcase #%d ... " % (cases - 1))
-            passed += do_test(archive, dictionary, __answer)
+            passed += do_test(seq, __answer)
 
     sys.stdout.write("\nPassed : %d / %d cases\n" % (passed, cases))
 
-    T = time.time() - 1389062244
+    T = time.time() - 1407536415
     PT, TT = (T / 60.0, 75.0)
-    points = 450 * (0.3 + (0.7 * TT * TT) / (10.0 * PT * PT + TT * TT))
+    points = 250 * (0.3 + (0.7 * TT * TT) / (10.0 * PT * PT + TT * TT))
     sys.stdout.write("Time   : %d minutes %d secs\n" % (int(T/60), T%60))
     sys.stdout.write("Score  : %.2f points\n" % points)
 
