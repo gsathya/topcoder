@@ -1,0 +1,28 @@
+-- Example 0
+3
+C..
+.C.
+.C.
+
+3
+-- Example 1
+3
+CCCC
+CCCC
+CCCC
+
+26
+-- Example 2
+1
+C
+
+0
+-- Example 3
+5
+CCC....
+C......
+....C.C
+.C.CC..
+C......
+
+81
