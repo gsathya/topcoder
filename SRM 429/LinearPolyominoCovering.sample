@@ -1,0 +1,20 @@
+-- Example 0
+XXXXXX
+
+AAAABB
+-- Example 1
+XX.XX
+
+BB.BB
+-- Example 2
+XXXX....XXX.....XX
+
+impossible
+-- Example 3
+X
+
+impossible
+-- Example 4
+XX.XXXXXXXXXX..XXXXXXXX...XXXXXX
+
+BB.AAAAAAAABB..AAAAAAAA...AAAABB
