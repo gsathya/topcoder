@@ -1,0 +1,70 @@
+-- Example 0
+3
+Joe Smith
+Brown, Sam
+Miller, Judi
+
+3
+Sam Brown
+Judi Miller
+Joe Smith
+-- Example 1
+3
+Campbell, Phil
+John Campbell
+Young, Warren
+
+3
+John Campbell
+Phil Campbell
+Warren Young
+-- Example 2
+3
+Kelly, Anthony
+Kelly Anthony
+Thompson, Jack
+
+3
+Kelly Anthony
+Anthony Kelly
+Jack Thompson
+-- Example 3
+9
+Trevor Alvarez
+Jackson, Walter
+Mandi Stuart
+Martin, Michael
+Peters, Tammy
+Richard Belmont
+Carl Thomas
+Ashton, Roger
+Jamie Martin
+
+9
+Trevor Alvarez
+Roger Ashton
+Richard Belmont
+Walter Jackson
+Jamie Martin
+Michael Martin
+Tammy Peters
+Mandi Stuart
+Carl Thomas
+-- Example 4
+3
+Banks, Cody
+Cody Banks
+Tod Wilson
+
+3
+Cody Banks
+Cody Banks
+Tod Wilson
+-- Example 5
+2
+Mill, Steve
+Miller, Jane
+
+2
+Steve Mill
+Jane Miller
