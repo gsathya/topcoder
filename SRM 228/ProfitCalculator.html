@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>TopCoder SRM 228 - 250: ProfitCalculator</title>
+    
+    <link type="image/x-icon" rel="shortcut icon" href="http://www.topcoder.com/i/favicon.ico"/>
+    
+
+    
+    <style type="text/css">
+        /* font */
+body {
+    font-family: Helvetica, Arial, Verdana, sans-serif;
+    font-size: 16px;
+    line-height: 1.2em;
+}
+ul.constraints > li:before, ul.notes > li:before {
+    font-family: monospace;
+    font-weight: normal;
+}
+.heading {
+    font-weight: bold;
+    font-size: 175%;
+    line-height: 1.2em;
+}
+.section .section-title {
+    font-weight: bold;
+    font-size: 125%;
+}
+ol.testcases > li:before {
+    font-family: monospace;
+}
+type {
+    font-weight: bold;
+    font-family: monospace;
+}
+li.testcase .data {
+    font-family: monospace;
+    line-height: 1.5em;
+}
+
+/* layout */
+.heading {
+    margin-top: 0.1em;
+    margin-bottom:0.1em;
+    text-align: center;
+}
+.section .section-title {
+    margin-top : 1em;
+    margin-bottom: 1em;
+}
+.problem-intro, note, user-constraint {
+    padding-left: 1.25em;
+}
+
+/* Lists */
+ul.constraints, ul.notes, ul.variables, ul.problem-definition-lines {
+    list-style-type: none;
+    padding: 0px;
+}
+ul.constraints > li:before {
+    content: "-";
+    position:relative;
+    margin-left: 0px; /* optional, for multiline li element */
+    left: 0.625em;
+}
+ul.notes > li:before {
+    content: "-";
+    position:relative;
+    margin-left: 0px; /* optional, for multiline li element */
+    left: 0.625em;
+}
+
+/* Testcases */
+li.testcase {
+    line-height: 1.1em;
+    padding-top: 0.625em;
+    padding-bottom: 0.625em;
+    overflow: auto;
+}
+li.testcase > .testcase-content > div { padding-bottom: 0.5em; padding-left: 1em; }
+
+li.testcase .testcase-comment {
+    margin: 0;
+    padding-left: 1em;
+}
+.testcase-comment p:first-child { margin-top: 0; }
+.testcase-comment p:last-child { margin-bottom: 0; }
+
+li.testcase .testcase-content {
+    margin: 0.31em;
+}
+
+/* Data and variables */
+.testcase-output {
+    padding: 0.2em 1em 0.2em 0em;
+}
+.variables, .testcase-output {
+    margin-left: 0.5em;
+    display: table;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+.variable {
+    display: table-row;
+}
+.variable .name {
+    padding: 0.2em 0em 0.2em 1em;
+    font-weight: bold;
+    display: table-cell;
+    text-align: right;
+}
+.testcase-output .prefix {
+    padding: 0.2em 0em 0.2em 1em;
+    display: table-cell;
+}
+.testcase-output .prefix:after {
+    content : ":";
+    padding-right: 0.5em;
+}
+.variable .name:after {
+    font-weight: bold;
+    content : ":";
+    padding-right: 0.5em;
+}
+.variable .value, .testcase-output .value {
+    padding: 0.2em 1em 0.2em 0em;
+    display: table-cell;
+}
+ol.testcases {
+    padding: 0px;
+    counter-reset: test_number -1;
+}
+ol.testcases > li {
+    list-style:none;
+}
+ol.testcases > li:before {
+    counter-increment:test_number;
+    display: block;
+    clear: both;
+    content:counter(test_number) ")";
+    color: inherit;
+    background: inherit;
+}
+
+/* Problem Definition */
+.problem-definition, .problem-limits {
+    padding-left: 1.25em;
+}
+.problem-definition-lines, .limit-lines {
+    display: table;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-left: 0px;
+}
+.definition-line, .limit-line {
+    display: table-row;
+    height: 1.5em;
+    overflow: auto;
+}
+.limit-name:after {
+    content: ":";
+    margin-right: 1em;
+}
+.definition-name, .definition-value, .limit-name, .limit-value {
+    display: table-cell;
+}
+.definition-value {
+    padding-left: 0.5em;
+}
+.definition-name:after {
+    content: ":";
+}
+#contest-division:before {
+    content: "Div ";
+}
+#problem-score:before {
+    content: "- Problem ";
+}
+#problem-name {
+    display: block;
+}
+
+/* Tags, hidden default */
+.tag {
+    visibility: hidden;
+    position: absolute;
+}
+
+        body {
+    /* font color */
+    color: #333333;
+    /* background color */
+    background-color: white;
+}
+.section .section-title {
+    /* title color */
+    color: black;
+}
+li.testcase .data {
+    /* highlight color */
+    background: #eee;
+}
+
+    </style>
+    
+    
+    
+
+</head>
+
+<body>
+    <h1 class="heading">
+        <span id='contest-name'>SRM 228</span>
+        <span id='contest-division'>2</span>
+        <span id='problem-score'>250</span>
+        <span id='problem-name'>ProfitCalculator</span>
+    </h1>
+
+    <hr />
+
+    <!-- Problem Statement -->
+    <div class="section">
+        <h2 class="section-title">Problem Statement</h2>
+        <div class="problem-intro">
+            <intro>Margin is defined as the percentage of the selling price of an item or group of items which is profit.  For example, if an item costs $80 and is sold for $100, then there is $20 profit, or 20% margin.
+<br /><br />
+You will be given a <type>String[]</type>, <b>items</b>, which is all of the items sold in a single transaction.  Each <type>String</type> in <b>items</b> will be formatted as follows: &quot;nnn.nn nnn.nn&quot; (quotes for clarity), where each n is a digit between '0' and '9' inclusive.  Each <type>String</type> will be exactly 13 characters in length.  The first number listed is the price the customer paid for the item.  The second number is what the cost to the store of the item was.
+<br /><br />
+You will create a class ProfitCalculator with a method percent which will calculate the percentage of margin on the transaction and return it as an <type>int</type>, rounded down to the greatest integer less than the actual value.
+<br /><br />
+For example, let's say you were given the following <type>String[]</type>:<pre>
+   { &quot;012.99 008.73&quot;,
+     &quot;099.99 050.00&quot;,
+     &quot;123.45 101.07&quot; }</pre>
+
+The total cost is $159.80.  The total price is $236.43.  That means $76.63 was made on this sale.  This would be a 32.41128% margin.  Since we are rounding down, you would return 32.</intro>
+        </div>
+    </div>
+    
+    <!-- Problem definition -->
+    
+    <div class="section" id="definition">
+        <h2 class="section-title">Definition</h2>
+        <div class="problem-definition">
+            <ul class="problem-definition-lines">
+                <li class="definition-line" id='class-line'>
+                    <span class='definition-name'>Class</span>
+                    <span class='definition-value'>ProfitCalculator</span>
+                </li>
+                <li class="definition-line" id='method-line'>
+                    <span class='definition-name'>Method</span>
+                    <span class='definition-value'>percent</span>
+                </li>
+                <li class="definition-line" id='parameters-line'>
+                    <span class='definition-name'>Parameters</span>
+                    <span class='definition-value'>
+                    
+                        tuple(string)
+                    
+                    </span>
+                </li>
+                <li class="definition-line" id='returns-line'>
+                    <span class='definition-name'>Returns</span>
+                    <span class='definition-value'>
+                        integer
+                    </span>
+                </li>
+                <li class="definition-line" id='signature-line'>
+                    <span class='definition-name'>Method signature</span>
+                    <span class='definition-value'>
+                        def percent(self, items)
+                    </span>
+                </li>
+            </ul>
+            <div class="problem-definition-public-tip">(be sure your method is public)</div>
+        </div>        
+    </div>
+    
+
+    <!-- Limits -->
+    <div class="section">
+        <h2 class="section-title">Limits</h2>
+        <div class='problem-limits'>
+            <ul class="limit-lines">
+                <li class='limit-line'>
+                    <span class='limit-name'>Time limit (s)</span>
+                    <span class='limit-value'>2.000</span>
+                </li>
+                <li class='limit-line'>
+                    <span class='limit-name'>Memory limit (MB)</span>
+                    <span class='limit-value'>64</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    
+    <!-- Notes -->
+    <div class="section">
+        <h2 class="section-title">Notes</h2>
+        <ul class="notes">
+        
+            <li><note>The cost for some items may be greater than the price they was sold for.  However, the sum of the prices of all the items in the transaction will be greater than the sum of the costs of all items.</note></li>
+        
+        </ul>
+    </div>
+    
+    
+    <!-- Constraints -->
+    <div class="section">
+        <h2 class="section-title">Constraints</h2>
+        <ul class="constraints">
+        
+            <li><user-constraint><b>items</b> will contain between 1 and 50 elements, inclusive.</user-constraint></li>
+        
+            <li><user-constraint>Every <type>String</type> in <b>items</b> will be exactly 13 characters in length.</user-constraint></li>
+        
+            <li><user-constraint>Every <type>String</type> in <b>items</b> will be formatted as &quot;nnn.nn nnn.nn&quot; where each n is a digit between '0' and '9' inclusive, thus the range for each price will be between &quot;000.00&quot; and &quot;999.99&quot; inclusive (all quotes for clarity).</user-constraint></li>
+        
+            <li><user-constraint>The total price of all items will be greater than the total cost of all items.</user-constraint></li>
+        
+            <li><user-constraint>The total price of all items will be greater than 0.</user-constraint></li>
+        
+            <li><user-constraint>The percent of margin, prior to rounding, will not be within 1e-5 of an integer.</user-constraint></li>
+        
+        </ul>
+    </div>
+
+    <!-- Test cases -->
+    <div class="section">
+        <h2 class="section-title">Test cases</h2>
+        <ol class="testcases" start='0'>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">items</span>
+                                <span class="value data">
+                                
+                                    {&quot;012.99 008.73&quot;,<br />&nbsp;&quot;099.99 050.00&quot;,<br />&nbsp;&quot;123.45 101.07&quot;}
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            32
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment">This is the example from above.</div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">items</span>
+                                <span class="value data">
+                                
+                                    {&quot;000.00 049.99&quot;,<br />&nbsp;&quot;999.99 936.22&quot;,<br />&nbsp;&quot;033.99 025.64&quot;,<br />&nbsp;&quot;249.99 211.87&quot;}
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            4
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment">The total price is $1283.97.  The total cost is $1223.72.  The margin prior to rounding is 4.6924772%.</div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">items</span>
+                                <span class="value data">
+                                
+                                    {&quot;822.77 704.86&quot;,<br />&nbsp;&quot;829.42 355.45&quot;,<br />&nbsp;&quot;887.18 949.38&quot;}
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            20
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment">The margin prior to rounding is 20.8587169%.</div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">items</span>
+                                <span class="value data">
+                                
+                                    {&quot;612.72 941.34&quot;,<br />&nbsp;&quot;576.46 182.66&quot;,<br />&nbsp;&quot;787.41 524.70&quot;,<br />&nbsp;&quot;637.96 333.23&quot;,<br />&nbsp;&quot;345.01 219.69&quot;,<br />&nbsp;&quot;567.22 104.77&quot;,<br />&nbsp;&quot;673.02 885.77&quot;}
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            23
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment">The margin prior to rounding is 23.9925711%.</div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">items</span>
+                                <span class="value data">
+                                
+                                    {&quot;811.22 275.32&quot;,<br />&nbsp;&quot;433.89 006.48&quot;,<br />&nbsp;&quot;141.28 967.41&quot;,<br />&nbsp;&quot;344.47 786.23&quot;,<br />&nbsp;&quot;897.47 860.61&quot;,<br />&nbsp;&quot;007.42 559.29&quot;,<br />&nbsp;&quot;255.72 460.00&quot;,<br />&nbsp;&quot;419.35 931.19&quot;,<br />&nbsp;&quot;419.25 490.52&quot;,<br />&nbsp;&quot;199.78 114.44&quot;,<br />&nbsp;&quot;505.63 276.58&quot;,<br />&nbsp;&quot;720.96 735.00&quot;,<br />&nbsp;&quot;719.90 824.46&quot;,<br />&nbsp;&quot;816.58 195.94&quot;,<br />&nbsp;&quot;498.68 453.05&quot;,<br />&nbsp;&quot;399.48 921.39&quot;,<br />&nbsp;&quot;930.88 017.63&quot;,<br />&nbsp;&quot;422.20 075.39&quot;,<br />&nbsp;&quot;380.22 917.27&quot;,<br />&nbsp;&quot;630.83 995.87&quot;,<br />&nbsp;&quot;821.07 126.87&quot;,<br />&nbsp;&quot;715.73 985.62&quot;,<br />&nbsp;&quot;246.23 134.64&quot;,<br />&nbsp;&quot;168.28 550.33&quot;,<br />&nbsp;&quot;707.28 046.72&quot;,<br />&nbsp;&quot;117.76 281.87&quot;,<br />&nbsp;&quot;595.43 410.45&quot;,<br />&nbsp;&quot;345.28 532.42&quot;,<br />&nbsp;&quot;554.24 264.34&quot;,<br />&nbsp;&quot;195.73 814.87&quot;,<br />&nbsp;&quot;131.98 041.28&quot;,<br />&nbsp;&quot;595.13 939.47&quot;,<br />&nbsp;&quot;576.04 107.70&quot;,<br />&nbsp;&quot;716.00 404.75&quot;,<br />&nbsp;&quot;524.24 029.96&quot;,<br />&nbsp;&quot;673.49 070.97&quot;,<br />&nbsp;&quot;288.09 849.43&quot;,<br />&nbsp;&quot;616.34 236.34&quot;,<br />&nbsp;&quot;401.96 316.33&quot;,<br />&nbsp;&quot;371.18 014.27&quot;,<br />&nbsp;&quot;809.63 508.33&quot;,<br />&nbsp;&quot;375.68 290.84&quot;,<br />&nbsp;&quot;334.66 477.89&quot;,<br />&nbsp;&quot;689.54 526.35&quot;,<br />&nbsp;&quot;084.77 316.51&quot;,<br />&nbsp;&quot;304.76 015.91&quot;,<br />&nbsp;&quot;460.63 636.56&quot;,<br />&nbsp;&quot;357.84 436.20&quot;,<br />&nbsp;&quot;752.24 047.64&quot;,<br />&nbsp;&quot;922.10 573.12&quot;}
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            10
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment">The margin prior to rounding is 10.4737522%.</div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+        </ol>
+    </div>
+    <hr />
+
+    This problem statement is the exclusive and proprietary property of TopCoder, Inc. Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.
+</body>
+</html>
