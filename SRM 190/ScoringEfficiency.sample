@@ -1,0 +1,70 @@
+-- Example 0
+2
+Made 3 point field goal
+Missed 2 point field goal
+
+1.5
+-- Example 1
+5
+Made free throw
+Missed free throw
+Missed free throw
+Missed free throw
+Made free throw
+
+0.8
+-- Example 2
+21
+Made 2 point field goal
+Made 2 point field goal
+Made 2 point field goal
+Made 2 point field goal
+Missed 2 point field goal
+Made 3 point field goal
+Made 3 point field goal
+Made 3 point field goal
+Missed 3 point field goal
+Missed 3 point field goal
+Missed 3 point field goal
+Missed 3 point field goal
+Made free throw
+Made free throw
+Made free throw
+Made free throw
+Made free throw
+Made free throw
+Made free throw
+Missed free throw
+Missed free throw
+
+1.4545454545454546
+-- Example 3
+26
+Made 2 point field goal
+Missed free throw
+Made free throw
+Missed free throw
+Made free throw
+Made 2 point field goal
+Made 2 point field goal
+Missed 2 point field goal
+Missed 2 point field goal
+Made 3 point field goal
+Missed 2 point field goal
+Made 2 point field goal
+Missed 2 point field goal
+Made 3 point field goal
+Missed 2 point field goal
+Missed 2 point field goal
+Missed 3 point field goal
+Made free throw
+Made free throw
+Missed 3 point field goal
+Missed 2 point field goal
+Missed 2 point field goal
+Made 2 point field goal
+Missed 2 point field goal
+Made 2 point field goal
+Missed 3 point field goal
+
+0.9565217391304348
